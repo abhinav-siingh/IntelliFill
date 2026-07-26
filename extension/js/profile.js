@@ -1,27 +1,5 @@
 let currentStep = 1;
 
-// const steps = [
-//     {
-//         title: "Personal Information",
-//         section: "personal",
-//         fields: [
-//             { id: "firstName", label: "First Name", type: "text" },
-//             { id: "lastName", label: "Last Name", type: "text" },
-//             { id: "email", label: "Email", type: "email" },
-//             { id: "phone", label: "Mobile Number", type: "tel" }
-//         ]
-//     },
-//     {
-//         title: "Address Information",
-//         section: "address",
-//         fields: [
-//             { id: "country", label: "Country", type: "text" },
-//             { id: "state", label: "State", type: "text" },
-//             { id: "city", label: "City", type: "text" },
-//             { id: "pinCode", label: "PIN Code", type: "text" }
-//         ]
-//     }
-// ];
 
 const profileData = {
     personal: {

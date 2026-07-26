@@ -1,0 +1,2 @@
+detectFormFields();
+observeFormChanges();
