@@ -26,6 +26,8 @@ async function loadProfile() {
             STORAGE_KEY,
             (result) => {
 
+                console.log("chrome.storage.local =", result);
+
                 resolve(result[STORAGE_KEY] || null);
 
             }

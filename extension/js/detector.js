@@ -110,7 +110,8 @@ function detectFormFields() {
         }
 
         fields.push({
-
+       
+            element: element,
             tag: element.tagName.toLowerCase(),
 
             type: element.type || "",

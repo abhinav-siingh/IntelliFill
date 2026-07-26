@@ -20,12 +20,16 @@
       "matches": [
         "<all_urls>"
       ],
-      "js": [
-        "js/rules.js",
-        "js/classifier.js",
-        "js/detector.js",
-        "content.js"
-      ],
+   "js": [
+    "js/storage.js",
+    "js/profileLoader.js",
+    "js/mapper.js",
+    "js/rules.js",
+    "js/classifier.js",
+    "js/detector.js",
+    "js/autofill.js",
+    "content.js"
+],
       "run_at": "document_idle"
     }
   ]
