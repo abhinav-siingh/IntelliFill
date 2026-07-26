@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IntelliFill Profile</title>
+
+    <link rel="stylesheet" href="profile.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brandLogo">⚡</div>
+
+            <div>
+
+                <h2>IntelliFill</h2>
+
+                <span>Profile Setup</span>
+
+            </div>
+
+        </div>
+
+        <nav>
+
+            <button class="navItem active" data-step="0">👤 Personal</button>
+
+            <button class="navItem" data-step="1">📍 Address</button>
+
+            <button class="navItem" data-step="2">🎓 Education</button>
+
+            <button class="navItem" data-step="3">💼 Career</button>
+
+            <button class="navItem" data-step="4">🌐 Social</button>
+
+            <button class="navItem" data-step="5">✅ Review</button>
+
+
+        </nav>
+
+    </aside>
+
+
+    <!-- Main -->
+
+    <main class="content">
+
+        <header class="topBar">
+
+            <div>
+
+                <h1 id="stepTitle">
+                    Personal Information
+                </h1>
+
+                <p id="stepSubtitle">
+                    Complete your profile for AI powered autofill.
+                </p>
+
+            </div>
+
+            <div class="saveStatus">
+
+                <span class="dot"></span>
+
+                Auto Saved
+
+            </div>
+
+        </header>
+
+
+        <!-- Dynamic Form -->
+
+        <section class="formCard">
+
+            <div id="formContainer"></div>
+
+        </section>
+
+
+        <!-- Footer -->
+
+        <footer class="footerBar">
+
+            <button id="prevBtn">
+                ← Previous
+            </button>
+
+            <button id="nextBtn" class="primaryBtn">
+                Next →
+            </button>
+
+        </footer>
+
+    </main>
+
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/database.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/steps.js"></script>
+<script src="js/renderer.js"></script>
+<script src="js/resume.js"></script>
+<script src="js/profile.js"></script>
+
+</body>
+
+</html>

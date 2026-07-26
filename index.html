@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliFill | AI-Powered Form Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="text-white overflow-x-hidden">
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-[120] flex flex-col gap-3"></div>
+
+    <!-- NEW NAVBAR -->
+    <div class="fixed w-full top-6 z-50 px-6">
+        <nav id="navbar"
+            class="max-w-6xl mx-auto nav-gradient-custom backdrop-blur-xl rounded-full px-8 py-4 flex justify-between items-center shadow-2xl transition-all duration-500">
+            <div class="flex items-center gap-2 text-xl font-black tracking-tighter cursor-pointer group"
+                onclick="location.reload()">
+                <div
+                    class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform shadow-lg">
+                    ✨</div>
+                <span class="text-white">IntelliFill</span>
+            </div>
+
+            <div class="hidden md:flex gap-8 text-sm font-bold text-gray-200">
+                <button onclick="openPopup('about')" class="hover:text-green-400 transition-all">AboutUS</button>
+                <button onclick="openPopup('docs')" class="hover:text-green-400 transition-all">Documentation</button>
+                <button onclick="openPopup('contact')" class="hover:text-green-400 transition-all">Contact</button>
+                <button onclick="openPopup('privacy')" class="hover:text-green-400 transition-all">Privacy</button>
+            </div>
+
+            <button onclick="handleAction('Opening Web Store...')"
+                class="hidden sm:block text-[10px] font-black px-6 py-2.5 bg-white text-green-900 rounded-full hover:bg-green-500 hover:text-white transition-all shadow-md">INSTALL
+                NOW</button>
+        </nav>
+    </div>
+
+    <!-- MODAL: ABOUT US -->
+    <div id="modal-about" class="modal-overlay" onclick="closePopup('about')">
+        <div class="glass modal-content max-w-4xl w-full p-12 rounded-[3rem] relative"
+            onclick="event.stopPropagation()">
+            <button onclick="closePopup('about')" class="absolute top-8 right-8 text-gray-400 hover:text-white"><i
+                    data-lucide="x"></i></button>
+            <h2 class="text-5xl font-black mb-8 text-green-400">Who We Are</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 rounded-3xl bg-white/5 border border-white/10">
+                    <i data-lucide="users" class="text-green-400 mb-4 w-10 h-10"></i>
+                    <h3 class="text-xl font-bold mb-2">The Collective</h3>
+                    <p class="text-gray-400 text-sm">I am a master’s student from the Computer Science branch,
+                        passionate about building smart and practical technology solutions that solve real-world
+                        problems.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-white/5 border border-white/10">
+                    <i data-lucide="zap" class="text-green-400 mb-4 w-10 h-10"></i>
+                    <h3 class="text-xl font-bold mb-2">Our Vision</h3>
+                    <p class="text-gray-400 text-sm">The goal is to create user-friendly, secure, and innovative
+                        applications that enhance productivity, reduce manual effort, and deliver a smooth and reliable
+                        user experience.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: DOCUMENTATION -->
+    <div id="modal-docs" class="modal-overlay" onclick="closePopup('docs')">
+        <div class="glass modal-content max-w-5xl w-full p-12 rounded-[3rem] relative"
+            onclick="event.stopPropagation()">
+            <button onclick="closePopup('docs')" class="absolute top-8 right-8 text-gray-400 hover:text-white"><i
+                    data-lucide="x"></i></button>
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/3 border-r border-white/10 pr-8">
+                    <h2 class="text-4xl font-black mb-8 text-green-400">Docs</h2>
+                    <ul class="space-y-4 font-bold text-gray-400">
+                        <li class="text-white">Quick Start</li>
+                        <li class="hover:text-green-400 cursor-pointer transition-colors">Neural v2 API</li>
+                        <li class="hover:text-green-400 cursor-pointer transition-colors">Privacy Toggles</li>
+                    </ul>
+                </div>
+                <div class="flex-1">
+                    <section id="docs" class="py-4 px-6 max-w-5xl mx-auto">
+                        <h2 class="text-4xl font-black mb-6">Documentation</h2>
+                        <p class="text-gray-400 mb-10">
+                            The AI-Based Intelligent Web Form Detection and Auto-Filling System is a browser extension
+                            that uses AI to automatically detect and fill online forms. It understands different field
+                            labels and matches them with stored user data, reducing time, effort, and errors.
+                        </p>
+                        <div class="space-y-6">
+                            <div class="glass p-6 rounded-2xl">
+                                <h3 class="text-xl font-bold text-indigo-400 mb-2">How It Works</h3>
+                                <ul class="list-disc ml-6 text-gray-400 space-y-2">
+                                    <li>Download the Extension first</li>
+                                    <li>create your profile by entering details once</li>
+                                    <li>Data is stored securely</li>
+                                    <li>Now , wherever the form found on screen</li>
+                                    <li>AI detects form fields and Automatically fills data</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL: PRIVACY -->
+    <div id="modal-privacy" class="modal-overlay" onclick="closePopup('privacy')">
+        <div class="glass modal-content max-w-2xl w-full p-12 rounded-[3rem] text-center relative"
+            onclick="event.stopPropagation()">
+            <button onclick="closePopup('privacy')" class="absolute top-8 right-8 text-gray-400 hover:text-white"><i
+                    data-lucide="x"></i></button>
+            <div class="w-16 h-16 bg-green-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="shield-check" class="text-green-400 w-8 h-8"></i>
+            </div>
+            <h2 class="text-4xl font-black mb-6">Privacy First</h2>
+            <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                Your profiles are encrypted and stored <strong>locally</strong>. We have zero servers for your sensitive
+                data.IntelliFill does not collect, store, or share your personal data on any external servers. All user
+                information, such as name, email, phone number, and other details, is stored locally on your device.
+                This ensures that your data never leaves your system and is not accessible to third parties.
+            </p>
+        </div>
+    </div>
+
+    <!-- MODAL: CONTACT -->
+    <div id="modal-contact" class="modal-overlay" onclick="closePopup('contact')">
+        <div class="glass modal-content max-w-lg w-full p-10 rounded-[3rem] relative" onclick="event.stopPropagation()">
+            <button onclick="closePopup('contact')" class="absolute top-8 right-8 text-gray-400 hover:text-white"><i
+                    data-lucide="x"></i></button>
+            <h2 class="text-3xl font-black mb-2">Contact Us</h2>
+            <p class="text-gray-400 text-sm mb-8">Email: <span
+                    class="text-green-400 font-bold">abhinavsinghchandel8@gmail.com</span></p>
+            <form id="contactForm" class="space-y-4">
+                <input type="text" id="senderName" required
+                    class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:border-green-500 text-white"
+                    placeholder="Name">
+                <input type="text" id="msgSubject" required
+                    class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:border-green-500 text-white"
+                    placeholder="Subject">
+                <textarea id="senderMsg" required rows="4"
+                    class="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-2xl outline-none focus:border-green-500 resize-none text-white"
+                    placeholder="Message"></textarea>
+                <button type="submit"
+                    class="w-full py-5 bg-green-600 hover:bg-green-500 rounded-2xl font-black text-lg transition-all">Send
+                    Message</button>
+            </form>
+        </div>
+    </div>
+
+    <section id="home"
+        class="hero-gradient min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20">
+        <div class="max-w-4xl space-y-8 mt-20">
+            <button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass border-white/10 
+               text-xs font-bold uppercase tracking-widest text-indigo-300 
+               transition-all duration-300 ease-in-out
+               hover:scale-105 hover:text-white hover:border-indigo-500/50
+               hover:shadow-[0_0_20px_rgba(129,140,248,0.5)] cursor-pointer">
+
+                <span
+                    class="w-2.5 h-2.5 rounded-full bg-indigo-400 animate-pulse shadow-[0_0_8px_rgba(129,140,248,0.8)]"></span>
+
+                Get Started / Fill Form
+            </button>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-4">
+                Welcome to <br><span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200">IntelliFill</span>
+            </h1>
+            <p class="text-lg md:text-xs font-medium text-indigo-100/80 max-w-2xl mx-auto">
+                An AI-Based Intelligent Web Form Detection and Auto-Filling System is a smart browser extension designed
+                to automatically detect and fill online forms using stored user data. It uses AI techniques to
+                understand different field labels like "Name," "Email," or "Address," even when they vary across
+                websites. The system reduces repetitive manual work, saves time, and minimizes typing errors. For more
+                information, read our documentation.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-5 justify-center pt-8">
+                <button onclick="handleAction('Redirecting to Chrome Store...')"
+                    class="glass px-10 py-5 rounded-2xl flex items-center gap-4 glow-hover transition-all border-white/20">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg"
+                        class="w-6 h-6" alt="Chrome">
+                    <div class="text-left">
+                        <p class="text-[10px] uppercase font-black opacity-40 leading-none">Available on</p>
+                        <p class="text-sm font-bold">Chrome Web Store</p>
+                    </div>
+                </button>
+
+                <button onclick="openPopup('docs')"
+                    class="bg-white text-slate-950 px-10 py-5 rounded-2xl font-bold flex items-center gap-2 hover:scale-105 transition-all shadow-xl shadow-white/10">
+                    Read the Docs <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-slate-950/50 border-y border-white/5">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div class="card-reveal">
+                <p class="text-4xl font-black text-white counter" data-target="650">0</p>
+                <p class="text-indigo-400 text-[10px] font-bold uppercase tracking-widest mt-2">Total Filled</p>
+            </div>
+            <div class="card-reveal">
+                <p class="text-4xl font-black text-white counter" data-target="95.9 %">0</p>
+                <p class="text-indigo-400 text-[10px] font-bold uppercase tracking-widest mt-2">Accuracy Rate</p>
+            </div>
+            <div class="card-reveal">
+                <p class="text-4xl font-black text-white counter" data-target="90">0</p>
+                <p class="text-indigo-400 text-[10px] font-bold uppercase tracking-widest mt-2">% Time Saved</p>
+            </div>
+            <div class="card-reveal">
+                <p class="text-4xl font-black text-white counter" data-target="465">0</p>
+                <p class="text-indigo-400 text-[10px] font-bold uppercase tracking-widest mt-2">+ Active Users</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 px-6 lg:px-20 relative">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-indigo-600/5 blur-[120px] rounded-full">
+        </div>
+        <div class="text-center mb-20 relative">
+            <h2 class="text-4xl md:text-5xl font-black mb-6">Start in 2 minutes</h2>
+            <p class="text-gray-400 max-w-xl mx-auto italic">Fill any form in seconds — no more typing again and again.
+                What took hours is now done instantly with IntelliFill.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="glass p-10 rounded-[2.5rem] card-reveal group hover:bg-white/5 transition-all">
+                <div
+                    class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all">
+                    <i data-lucide="layers" class="text-blue-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Install extension</h3>
+                <p class="text-gray-500 leading-relaxed">Universal support for Chrome, Firefox, and Edge. With just one
+                    click, you can deploy IntelliFill and begin automating form filling across different websites
+                    without any complex setup.</p>
+            </div>
+
+            <div class="glass p-10 rounded-[2.5rem] card-reveal group hover:bg-white/5 transition-all">
+                <div
+                    class="w-16 h-16 bg-indigo-500/20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all">
+                    <i data-lucide="shield-check" class="text-indigo-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Setup Profile</h3>
+                <p class="text-gray-500 leading-relaxed">After installing, you just fill your detailed form once. it
+                    also learns new field labels automatically by our ML algorithm to improve over time.</p>
+            </div>
+
+            <div class="glass p-10 rounded-[2.5rem] card-reveal group hover:bg-white/5 transition-all">
+                <div
+                    class="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-6 transition-all">
+                    <i data-lucide="zap" class="text-purple-400 w-8 h-8"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Run intelliFill</h3>
+                <p class="text-gray-500 leading-relaxed">After detecting a form, a confirmation popup appears. Once
+                    confirmed, the form is automatically filled, and at the end, a review option is provided to verify
+                    or edit the details.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="docs" class="py-32 px-6 lg:px-20 bg-slate-950/30">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4">See IntelliFill in Action</h2>
+                <p class="text-gray-500">The browser engine analyzes form structure in real-time.</p>
+            </div>
+
+            <div class="relative group">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000">
+                </div>
+                <div class="relative glass rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
+                    <div class="flex items-center gap-2 p-4 bg-white/5 border-b border-white/5">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500/30"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500/30"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500/30"></div>
+                        </div>
+                        <div
+                            class="mx-auto bg-slate-800/50 px-6 py-1.5 rounded-full text-[10px] text-gray-500 font-mono tracking-tighter uppercase">
+                            secure.intellifill.ai/demo</div>
+                    </div>
+
+                    <div class="relative h-[500px] flex items-center justify-center bg-[#0b1222]">
+                        <div class="absolute inset-0 opacity-10"
+                            style="background-image: radial-gradient(#4f46e5 0.5px, transparent 0.5px); background-size: 24px 24px;">
+                        </div>
+                        <div
+                            class="glass px-10 py-8 rounded-3xl flex flex-col items-center gap-6 shadow-2xl border-indigo-500/30 relative z-10">
+                            <div class="spinner"></div>
+                            <div class="text-center">
+                                <p class="font-black text-xl tracking-tight animate-pulse">Auto-filling Application</p>
+                                <p class="text-xs text-indigo-400 font-bold uppercase mt-1">Neural Mapping Active</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-32 px-6 lg:px-20 bg-slate-950/20 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div class="max-w-xl">
+                    <h2 class="text-4xl md:text-5xl font-black mb-4 tracking-tighter">Wall of Love</h2>
+                    <p class="text-gray-500">Join 85,000+ professionals who have reclaimed their time. See what the
+                        community is saying about IntelliFill.</p>
+                </div>
+                <button onclick="handleAction('Opening Review Portal...')"
+                    class="glass px-6 py-3 rounded-xl text-sm font-bold border-indigo-500/20 hover:bg-indigo-500/10 transition-all flex items-center gap-2">
+                    Write a Review <i data-lucide="pen-tool" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="glass p-8 rounded-[2rem] border-white/5 hover:border-indigo-500/30 transition-all card-reveal group">
+                    <div class="flex gap-1 mb-4 text-yellow-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i
+                            data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-8 leading-relaxed">"The AI actually understands nested dropdowns
+                        and custom date pickers. I haven't typed my address in three months. Absolute lifesaver for job
+                        hunting!"</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center font-bold border-2 border-white/10">
+                            JD</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Jordan Smith</h4>
+                            <p class="text-xs text-gray-500">Software Engineer @ Vercel</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="glass p-8 rounded-[2rem] border-white/5 hover:border-indigo-500/30 transition-all card-reveal group">
+                    <div class="flex gap-1 mb-4 text-yellow-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i
+                            data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-8 leading-relaxed">"I handle hundreds of vendor registrations a
+                        week. IntelliFill turned a 4-hour daily grind into a 20-minute task. The local encryption is
+                        what sold me."</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center font-bold border-2 border-white/10">
+                            ML</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Abhinav Singh</h4>
+                            <p class="text-xs text-gray-500">Operations Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="glass p-8 rounded-[2rem] border-white/5 hover:border-indigo-500/30 transition-all card-reveal group">
+                    <div class="flex gap-1 mb-4 text-yellow-500">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i><i data-lucide="star" class="w-4 h-4 fill-current"></i><i
+                            data-lucide="star" class="w-4 h-4 fill-current"></i><i data-lucide="star"
+                            class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-gray-300 italic mb-8 leading-relaxed">"Clean UI, fast detection, and it doesn't break
+                        when websites update their layout. It's like having a personal assistant inside my browser."</p>
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center font-bold border-2 border-white/10">
+                            KH</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Kevin Huang</h4>
+                            <p class="text-xs text-gray-500">Product Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 px-6 lg:px-20 relative overflow-hidden">
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full bg-indigo-600/20 blur-[150px] pointer-events-none">
+        </div>
+
+        <div class="max-w-4xl mx-auto glass rounded-[3rem] p-12 md:p-20 text-center border-white/10 relative z-10">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest text-indigo-400 mb-8">
+                <i data-lucide="clock" class="w-3 h-3"></i> ROI Calculator
+            </div>
+
+            <h2 class="text-4xl md:text-6xl font-black mb-6 tracking-tighter">Save Minutes On Every Form</h2>
+            <p class="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+                Install IntelliFill for free and start autofilling right away. Your data stays <span
+                    class="text-white font-bold">secure and local</span>.
+            </p>
+
+            <div class="grid grid-cols-2 gap-4 mb-12 max-w-md mx-auto">
+                <div class="bg-indigo-500/10 rounded-2xl p-6 border border-indigo-500/20">
+                    <p class="text-3xl font-black text-indigo-400 mb-1" id="time-saved-display">420</p>
+                    <p class="text-[10px] uppercase font-bold text-gray-500 tracking-widest">Minutes Saved / Year</p>
+                </div>
+
+                <div class="bg-purple-500/10 rounded-2xl p-6 border border-purple-500/20">
+                    <p class="text-3xl font-black text-purple-400 mb-1">FREE</p>
+                    <p class="text-[10px] uppercase font-bold text-gray-500 tracking-widest">Current Cost</p>
+                </div>
+            </div>
+
+            <button onclick="handleAction('Launching Extension...')"
+                class="group relative px-12 py-6 bg-white text-slate-950 rounded-2xl font-black text-xl hover:scale-105 hover:shadow-[0_20px_50px_rgba(255,255,255,0.2)] transition-all flex items-center gap-4 mx-auto">
+                Get Started — It's Free
+                <i data-lucide="arrow-right" class="w-6 h-6 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+
+            <p class="mt-8 text-xs text-gray-500 font-medium">No credit card required • Chrome, Firefox, Edge</p>
+        </div>
+    </section>
+
+    <footer class="bg-[#0b1222] border-t border-white/5 pt-24 pb-12 px-6 lg:px-20">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-5 gap-12 mb-20">
+            <div class="col-span-2">
+                <div class="flex items-center gap-2 text-2xl font-black mb-6">
+                    <span class="text-indigo-500">✨</span> IntelliFill
+                </div>
+                <p class="text-gray-500 text-sm leading-relaxed max-w-xs mb-8">
+                    Revolutionizing how humans interact with the web. No more tedious typing, just seamless
+                    intelligence.
+                </p>
+                <div class="flex gap-4">
+                    <button onclick="handleAction('Following on Twitter...')"
+                        class="w-10 h-10 glass rounded-xl flex items-center justify-center hover:text-indigo-400 transition-all"><i
+                            data-lucide="twitter" class="w-4 h-4"></i></button>
+                    <button onclick="handleAction('Opening Github...')"
+                        class="w-10 h-10 glass rounded-xl flex items-center justify-center hover:text-indigo-400 transition-all"><i
+                            data-lucide="github" class="w-4 h-4"></i></button>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold mb-8 text-xs uppercase tracking-widest text-indigo-400">Product</h4>
+                <ul class="space-y-4 text-sm text-gray-500">
+                    <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Security</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Enterprise</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-8 text-xs uppercase tracking-widest text-indigo-400">Company</h4>
+                <ul class="space-y-4 text-sm text-gray-500">
+                    <li><button onclick="openPopup('about')" class="hover:text-white transition-colors">About</button>
+                    </li>
+                    <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                    <li><button onclick="openPopup('contact')"
+                            class="hover:text-white transition-colors">Contact</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-8 text-xs uppercase tracking-widest text-indigo-400">Resources</h4>
+                <ul class="space-y-4 text-sm text-gray-500">
+                    <li><button onclick="openPopup('docs')"
+                            class="hover:text-white transition-colors">Documentation</button></li>
+                    <li><button onclick="openPopup('privacy')"
+                            class="hover:text-white transition-colors">Privacy</button></li>
+                    <li><a href="#" class="hover:text-white transition-colors">API Status</a></li>
+                </ul>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto pt-8 border-t border-white/5 text-center text-gray-600 text-[10px] font-bold uppercase tracking-widest">
+            © 2026 IntelliFill Labs. Built with Intelligence.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

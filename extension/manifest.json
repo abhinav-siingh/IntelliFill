@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "IntelliFill",
+  "version": "1.0.0",
+  "description": "AI-Powered Intelligent Web Form Detection and Auto-Filling System",
+
+  "action": {
+    "default_title": "IntelliFill",
+    "default_popup": "popup.html"
+  },
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ]
+}
