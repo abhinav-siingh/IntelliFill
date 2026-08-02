@@ -350,11 +350,6 @@ Footer
 
 }
 
-.input-group.full{
-
-    grid-column:1 / -1;
-
-}
 
 .input-group{
 
@@ -376,7 +371,8 @@ Footer
 
 }
 
-.input-group input{
+.input-group input,
+.input-group select{
 
     width:100%;
 
@@ -398,7 +394,8 @@ Footer
 
 }
 
-.input-group input:focus{
+.input-group input:focus,
+.input-group select:focus{
 
     outline:none;
 
@@ -417,15 +414,7 @@ Footer
     margin-top:6px;
 
 }
-.formGrid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:22px;
-}
 
-.input-group.full{
-    grid-column:1/-1;
-}
 
 .inputWrapper{
     position:relative;
@@ -802,5 +791,32 @@ Review Page
     color:#EF4444;
 
     font-weight:600;
+
+}
+/* Select Dropdown Styling */
+
+.input-group select{
+
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+
+    cursor:pointer;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:right 15px center;
+
+    padding-right:45px;
+
+}
+
+.input-group select option{
+
+    background:#1E293B;
+
+    color:white;
 
 }

@@ -2,51 +2,59 @@ let currentStep = 1;
 
 
 const profileData = {
+
     personal: {
+
         firstName: "",
         lastName: "",
+
+        gender: "",
+        dob: "",
+
+        fatherName: "",
+        motherName: "",
+
         email: "",
         phone: ""
+
     },
 
     address: {
+
+        address: "",
+
         country: "",
         state: "",
         city: "",
         pinCode: ""
+
     },
 
     education: {
 
-    // Personal
-    dob: "",
+        tenthSchool: "",
+        tenthBoard: "",
+        tenthPassingYear: "",
+        tenthPercentage: "",
 
-    // 10th
-    tenthSchool: "",
-    tenthBoard: "",
-    tenthPassingYear: "",
-    tenthPercentage: "",
+        twelfthSchool: "",
+        twelfthBoard: "",
+        twelfthPassingYear: "",
+        twelfthPercentage: "",
 
-    // 12th
-    twelfthSchool: "",
-    twelfthBoard: "",
-    twelfthPassingYear: "",
-    twelfthPercentage: "",
+        graduationDegree: "",
+        college: "",
+        course: "",
+        graduationYear: "",
+        graduationPercentage: "",
 
-    // Graduation
-    graduationDegree: "",
-    college: "",
-    course: "",
-    graduationYear: "",
-    graduationPercentage: "",
+        mastersDegree: "",
+        mastersCollege: "",
+        mastersYear: "",
+        mastersPercentage: ""
 
-    // Master's
-    mastersDegree: "",
-    mastersCollege: "",
-    mastersYear: "",
-    mastersPercentage: ""
+    },
 
-},
     professional: {
 
         currentStatus: "",
@@ -60,6 +68,7 @@ const profileData = {
         preferredLocation: ""
 
     },
+
     social: {
 
         linkedin: "",
@@ -70,7 +79,8 @@ const profileData = {
 
         resume: ""
 
-    },
+    }
+
 };
 
 async function autoSave() {
@@ -89,7 +99,7 @@ function renderStep(errors = {}) {
 
     formContainer.innerHTML = generateForm(step, profileData, errors);
 
-    
+
 
     prevBtn.style.display =
         currentStep === 1 ? "none" : "inline-block";
@@ -101,29 +111,29 @@ function renderStep(errors = {}) {
 
     attachInputListeners();
     if (currentStep === 5) {
-    loadSavedResume();
-}
-document.querySelectorAll(".navItem").forEach((item, index) => {
-
-    item.classList.remove("active", "completed");
-
-    if (index < currentStep - 1) {
-
-        item.classList.add("completed");
-
-    } else if (index === currentStep - 1) {
-
-        item.classList.add("active");
-
+        loadSavedResume();
     }
+    document.querySelectorAll(".navItem").forEach((item, index) => {
 
-});
+        item.classList.remove("active", "completed");
 
-document.getElementById("stepTitle").textContent =
-steps[currentStep-1].title;
+        if (index < currentStep - 1) {
 
-document.getElementById("stepSubtitle").textContent =
-`Step ${currentStep} of ${steps.length}`;
+            item.classList.add("completed");
+
+        } else if (index === currentStep - 1) {
+
+            item.classList.add("active");
+
+        }
+
+    });
+
+    document.getElementById("stepTitle").textContent =
+        steps[currentStep - 1].title;
+
+    document.getElementById("stepSubtitle").textContent =
+        `Step ${currentStep} of ${steps.length}`;
 
 }
 
@@ -144,18 +154,21 @@ function attachInputListeners() {
             return;
         }
 
-        input.addEventListener("input", async () => {
+        const saveField = async () => {
 
             profileData[step.section][field.id] = input.value;
 
             await autoSave();
 
-        });
+        };
+
+        input.addEventListener("input", saveField);
+        input.addEventListener("change", saveField);
 
     });
 
     // Resume Upload Listener
-const resumeInput = document.getElementById("resumeFile");
+    const resumeInput = document.getElementById("resumeFile");
 
     if (resumeInput) {
 

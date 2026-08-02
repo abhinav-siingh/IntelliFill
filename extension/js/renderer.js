@@ -105,30 +105,73 @@ function generateForm(step, profileData, errors = {}) {
 
         ].includes(field.id);
 
-        html += `
+        if (field.type === "select") {
+
+            html += `
 <div class="input-group ${halfWidth ? "half" : "full"}">
 
-                <label for="${field.id}">
-                    ${field.label}
-                </label>
+    <label for="${field.id}">
+        ${field.label}
+    </label>
 
-                <input
-                    type="${field.type}"
-                    id="${field.id}"
-                    name="${field.id}"
-                    placeholder="${field.placeholder || ""}"
-                    value="${value}"
-                    class="${error ? "input-error" : ""}"
-                    autocomplete="off"
-                    maxlength="${field.maxlength || ""}"
-                >
+    <select
+        id="${field.id}"
+        name="${field.id}"
+        class="${error ? "input-error" : ""}"
+    >
 
-                <div class="error-message">
-                    ${error}
-                </div>
+        <option value="">
+            Select ${field.label}
+        </option>
 
-            </div>
-        `;
+        ${field.options.map(option => `
+
+            <option
+                value="${option}"
+                ${value === option ? "selected" : ""}
+            >
+                ${option}
+            </option>
+
+        `).join("")}
+
+    </select>
+
+    <div class="error-message">
+        ${error}
+    </div>
+
+</div>
+`;
+
+        } else {
+
+            html += `
+<div class="input-group ${halfWidth ? "half" : "full"}">
+
+    <label for="${field.id}">
+        ${field.label}
+    </label>
+
+    <input
+        type="${field.type}"
+        id="${field.id}"
+        name="${field.id}"
+        placeholder="${field.placeholder || ""}"
+        value="${value}"
+        class="${error ? "input-error" : ""}"
+        autocomplete="off"
+        maxlength="${field.maxlength || ""}"
+    >
+
+    <div class="error-message">
+        ${error}
+    </div>
+
+</div>
+`;
+
+        }
 
     });
 
@@ -140,33 +183,33 @@ function generateForm(step, profileData, errors = {}) {
     return html;
 
 }
-function generateReview(profileData) {
+// function generateReview(profileData) {
 
-    return `
+//     return `
 
-<div class="review-page">
+// <div class="review-page">
 
-<h2>Review Your Profile</h2>
+// <h2>Review Your Profile</h2>
 
-<div class="review-card">
+// <div class="review-card">
 
-<h3>👤 Personal Information</h3>
+// <h3>👤 Personal Information</h3>
 
-<p><b>First Name:</b> ${profileData.personal.firstName}</p>
+// <p><b>First Name:</b> ${profileData.personal.firstName}</p>
 
-<p><b>Last Name:</b> ${profileData.personal.lastName}</p>
+// <p><b>Last Name:</b> ${profileData.personal.lastName}</p>
 
-<p><b>Email:</b> ${profileData.personal.email}</p>
+// <p><b>Email:</b> ${profileData.personal.email}</p>
 
-<p><b>Phone:</b> ${profileData.personal.phone}</p>
+// <p><b>Phone:</b> ${profileData.personal.phone}</p>
 
-</div>
+// </div>
 
-</div>
+// </div>
 
-`;
+// `;
 
-}
+// }
 function reviewRow(label, value) {
 
     const filled =
@@ -193,7 +236,7 @@ function reviewRow(label, value) {
     `;
 
 }
-function reviewCard(title, rows){
+function reviewCard(title, rows) {
 
     return `
 
@@ -208,7 +251,7 @@ function reviewCard(title, rows){
     `;
 
 }
-function generateReview(profileData){
+function generateReview(profileData) {
 
     return `
 
@@ -224,75 +267,79 @@ Please verify your information before saving.
 
 ${reviewCard(
 
-"👤 Personal Information",
+        "👤 Personal Information",
 
-reviewRow("First Name",profileData.personal.firstName)+
-reviewRow("Last Name",profileData.personal.lastName)+
-reviewRow("Email",profileData.personal.email)+
-reviewRow("Mobile",profileData.personal.phone)
+        reviewRow("First Name", profileData.personal.firstName) +
+        reviewRow("Last Name", profileData.personal.lastName) +
+        reviewRow("Email", profileData.personal.email) +
+        reviewRow("Mobile", profileData.personal.phone) +
+        reviewRow("Gender", profileData.personal.gender) +
+        reviewRow("Date of Birth", profileData.personal.dob) +
+        reviewRow("Father Name", profileData.personal.fatherName) +
+        reviewRow("Mother Name", profileData.personal.motherName)
 
-)}
-
-${reviewCard(
-
-"📍 Address",
-
-reviewRow("Country",profileData.address.country)+
-reviewRow("State",profileData.address.state)+
-reviewRow("City",profileData.address.city)+
-reviewRow("PIN Code",profileData.address.pinCode)
-
-)}
+    )}
 
 ${reviewCard(
 
-"🎓 Education",
+        "📍 Address",
 
-reviewRow("Date of Birth",profileData.education.dob)+
-reviewRow("10th School",profileData.education.tenthSchool)+
-reviewRow("10th Board",profileData.education.tenthBoard)+
-reviewRow("10th %",profileData.education.tenthPercentage)+
-reviewRow("12th School",profileData.education.twelfthSchool)+
-reviewRow("12th Board",profileData.education.twelfthBoard)+
-reviewRow("12th %",profileData.education.twelfthPercentage)+
-reviewRow("Graduation Degree",profileData.education.graduationDegree)+
-reviewRow("Graduation College",profileData.education.college)+
-reviewRow("Graduation %",profileData.education.graduationPercentage)+
-reviewRow("Masters Degree",profileData.education.mastersDegree)+
-reviewRow("Masters College",profileData.education.mastersCollege)+
-reviewRow("Masters %",profileData.education.mastersPercentage)
+        reviewRow("Country", profileData.address.country) +
+        reviewRow("State", profileData.address.state) +
+        reviewRow("City", profileData.address.city) +
+        reviewRow("PIN Code", profileData.address.pinCode)
 
-)}
+    )}
 
 ${reviewCard(
 
-"💼 Professional",
+        "🎓 Education",
 
-reviewRow("Current Status",profileData.professional.currentStatus)+
-reviewRow("Preferred Role",profileData.professional.preferredRole)+
-reviewRow("Skills",profileData.professional.skills)+
-reviewRow("Experience",profileData.professional.experience)+
-reviewRow("Preferred Location",profileData.professional.preferredLocation)
+        reviewRow("Date of Birth", profileData.education.dob) +
+        reviewRow("10th School", profileData.education.tenthSchool) +
+        reviewRow("10th Board", profileData.education.tenthBoard) +
+        reviewRow("10th %", profileData.education.tenthPercentage) +
+        reviewRow("12th School", profileData.education.twelfthSchool) +
+        reviewRow("12th Board", profileData.education.twelfthBoard) +
+        reviewRow("12th %", profileData.education.twelfthPercentage) +
+        reviewRow("Graduation Degree", profileData.education.graduationDegree) +
+        reviewRow("Graduation College", profileData.education.college) +
+        reviewRow("Graduation %", profileData.education.graduationPercentage) +
+        reviewRow("Masters Degree", profileData.education.mastersDegree) +
+        reviewRow("Masters College", profileData.education.mastersCollege) +
+        reviewRow("Masters %", profileData.education.mastersPercentage)
 
-)}
-
-${reviewCard(
-
-"🌐 Social",
-
-reviewRow("LinkedIn",profileData.social.linkedin)+
-reviewRow("GitHub",profileData.social.github)+
-reviewRow("Portfolio",profileData.social.portfolio)
-
-)}
+    )}
 
 ${reviewCard(
 
-"📄 Resume",
+        "💼 Professional",
 
-reviewRow("Resume",uploadedResume ? uploadedResume.name : "")
+        reviewRow("Current Status", profileData.professional.currentStatus) +
+        reviewRow("Preferred Role", profileData.professional.preferredRole) +
+        reviewRow("Skills", profileData.professional.skills) +
+        reviewRow("Experience", profileData.professional.experience) +
+        reviewRow("Preferred Location", profileData.professional.preferredLocation)
 
-)}
+    )}
+
+${reviewCard(
+
+        "🌐 Social",
+
+        reviewRow("LinkedIn", profileData.social.linkedin) +
+        reviewRow("GitHub", profileData.social.github) +
+        reviewRow("Portfolio", profileData.social.portfolio)
+
+    )}
+
+${reviewCard(
+
+        "📄 Resume",
+
+        reviewRow("Resume", profileData.social.resume)
+
+    )}
 
 </div>
 

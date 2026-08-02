@@ -154,7 +154,11 @@ function detectFormFields() {
 /**
  * Observe dynamically added form fields
  */
-function observeFormChanges() {
+/**
+ * Observe dynamically added form fields
+ */
+
+function observeFormChanges(callback) {
 
     console.log("✅ Observer Started");
 
@@ -181,19 +185,21 @@ function observeFormChanges() {
 
         });
 
-        if (shouldScan) {
-
-            clearTimeout(scanTimeout);
-
-            scanTimeout = setTimeout(() => {
-
-                console.log("🔄 New Form Detected");
-
-                detectFormFields();
-
-            }, 300);
-
+        if (!shouldScan) {
+            return;
         }
+
+        clearTimeout(scanTimeout);
+
+        scanTimeout = setTimeout(() => {
+
+            console.log("🔄 New Form Detected");
+
+            if (typeof callback === "function") {
+                callback();
+            }
+
+        }, 300);
 
     });
 

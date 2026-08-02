@@ -26,6 +26,40 @@ const steps = [
             },
 
             {
+                id: "gender",
+                label: "Gender",
+                type: "select",
+                required: true,
+                options: [
+                    "Male",
+                    "Female",
+                    "Other"
+                ]
+            },
+            {
+                id: "dob",
+                label: "Date of Birth",
+                type: "date",
+                required: true
+            },
+
+            {
+                id: "fatherName",
+                label: "Father Name",
+                type: "text",
+                required: true,
+                placeholder: "Enter Father Name"
+            },
+
+            {
+                id: "motherName",
+                label: "Mother Name",
+                type: "text",
+                required: true,
+                placeholder: "Enter Mother Name"
+            },
+
+            {
                 id: "email",
                 label: "Email",
                 type: "email",
@@ -105,150 +139,150 @@ const steps = [
 
         fields: [
 
-    {
-        id: "dob",
-        label: "Date of Birth",
-        type: "date",
-        required: true
-    },
+            {
+                id: "dob",
+                label: "Date of Birth",
+                type: "date",
+                required: true
+            },
 
-    {
-        id: "tenthSchool",
-        label: "10th School Name",
-        type: "text",
-        required: true,
-        placeholder: "Enter School Name"
-    },
+            {
+                id: "tenthSchool",
+                label: "10th School Name",
+                type: "text",
+                required: true,
+                placeholder: "Enter School Name"
+            },
 
-    {
-        id: "tenthBoard",
-        label: "10th Board",
-        type: "text",
-        required: true,
-        placeholder: "CBSE / ICSE / State Board"
-    },
+            {
+                id: "tenthBoard",
+                label: "10th Board",
+                type: "text",
+                required: true,
+                placeholder: "CBSE / ICSE / State Board"
+            },
 
-    {
-        id: "tenthPassingYear",
-        label: "10th Passing Year",
-        type: "number",
-        required: true,
-        placeholder: "2019"
-    },
+            {
+                id: "tenthPassingYear",
+                label: "10th Passing Year",
+                type: "number",
+                required: true,
+                placeholder: "2019"
+            },
 
-    {
-        id: "tenthPercentage",
-        label: "10th Percentage / CGPA",
-        type: "text",
-        required: true,
-        placeholder: "85% / 8.5"
-    },
+            {
+                id: "tenthPercentage",
+                label: "10th Percentage / CGPA",
+                type: "text",
+                required: true,
+                placeholder: "85% / 8.5"
+            },
 
-    {
-        id: "twelfthSchool",
-        label: "12th School Name",
-        type: "text",
-        required: true,
-        placeholder: "Enter School Name"
-    },
+            {
+                id: "twelfthSchool",
+                label: "12th School Name",
+                type: "text",
+                required: true,
+                placeholder: "Enter School Name"
+            },
 
-    {
-        id: "twelfthBoard",
-        label: "12th Board",
-        type: "text",
-        required: true,
-        placeholder: "CBSE / State Board"
-    },
+            {
+                id: "twelfthBoard",
+                label: "12th Board",
+                type: "text",
+                required: true,
+                placeholder: "CBSE / State Board"
+            },
 
-    {
-        id: "twelfthPassingYear",
-        label: "12th Passing Year",
-        type: "number",
-        required: true,
-        placeholder: "2021"
-    },
+            {
+                id: "twelfthPassingYear",
+                label: "12th Passing Year",
+                type: "number",
+                required: true,
+                placeholder: "2021"
+            },
 
-    {
-        id: "twelfthPercentage",
-        label: "12th Percentage / CGPA",
-        type: "text",
-        required: true,
-        placeholder: "88% / 8.8"
-    },
+            {
+                id: "twelfthPercentage",
+                label: "12th Percentage / CGPA",
+                type: "text",
+                required: true,
+                placeholder: "88% / 8.8"
+            },
 
-    {
-        id: "graduationDegree",
-        label: "Graduation Degree",
-        type: "text",
-        required: true,
-        placeholder: "BCA / B.Tech / B.Sc"
-    },
+            {
+                id: "graduationDegree",
+                label: "Graduation Degree",
+                type: "text",
+                required: true,
+                placeholder: "BCA / B.Tech / B.Sc"
+            },
 
-    {
-        id: "college",
-        label: "Graduation College / University",
-        type: "text",
-        required: true,
-        placeholder: "Enter College Name"
-    },
+            {
+                id: "college",
+                label: "Graduation College / University",
+                type: "text",
+                required: true,
+                placeholder: "Enter College Name"
+            },
 
-    {
-        id: "course",
-        label: "Course / Branch",
-        type: "text",
-        required: true,
-        placeholder: "Computer Science"
-    },
+            {
+                id: "course",
+                label: "Course / Branch",
+                type: "text",
+                required: true,
+                placeholder: "Computer Science"
+            },
 
-    {
-        id: "graduationYear",
-        label: "Graduation Passing Year",
-        type: "number",
-        required: true,
-        placeholder: "2025"
-    },
+            {
+                id: "graduationYear",
+                label: "Graduation Passing Year",
+                type: "number",
+                required: true,
+                placeholder: "2025"
+            },
 
-    {
-        id: "graduationPercentage",
-        label: "Graduation Percentage / CGPA",
-        type: "text",
-        required: true,
-        placeholder: "8.3 / 83%"
-    },
+            {
+                id: "graduationPercentage",
+                label: "Graduation Percentage / CGPA",
+                type: "text",
+                required: true,
+                placeholder: "8.3 / 83%"
+            },
 
-    {
-        id: "mastersDegree",
-        label: "Master's Degree",
-        type: "text",
-        required: false,
-        placeholder: "MCA / MBA / M.Tech"
-    },
+            {
+                id: "mastersDegree",
+                label: "Master's Degree",
+                type: "text",
+                required: false,
+                placeholder: "MCA / MBA / M.Tech"
+            },
 
-    {
-        id: "mastersCollege",
-        label: "Master's College / University",
-        type: "text",
-        required: false,
-        placeholder: "Enter College Name"
-    },
+            {
+                id: "mastersCollege",
+                label: "Master's College / University",
+                type: "text",
+                required: false,
+                placeholder: "Enter College Name"
+            },
 
-    {
-        id: "mastersYear",
-        label: "Master's Passing Year",
-        type: "number",
-        required: false,
-        placeholder: "2027"
-    },
+            {
+                id: "mastersYear",
+                label: "Master's Passing Year",
+                type: "number",
+                required: false,
+                placeholder: "2027"
+            },
 
-    {
-        id: "mastersPercentage",
-        label: "Master's Percentage / CGPA",
-        type: "text",
-        required: false,
-        placeholder: "8.8 / 88%"
-    }
+            {
+                id: "mastersPercentage",
+                label: "Master's Percentage / CGPA",
+                type: "text",
+                required: false,
+                placeholder: "8.8 / 88%"
+            }
 
-]
+        ]
 
     },
 
@@ -355,16 +389,16 @@ const steps = [
     // Step 6 - Review Profiles
     // ==========================
 
-{
-    title: "Review Profile",
-    section: "review",
+    {
+        title: "Review Profile",
+        section: "review",
 
-    fields: [
-        {
-            id: "review",
-            type: "review"
-        }
-    ]
-}
-    
+        fields: [
+            {
+                id: "review",
+                type: "review"
+            }
+        ]
+    }
+
 ];

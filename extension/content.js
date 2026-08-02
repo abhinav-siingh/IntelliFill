@@ -1,10 +1,10 @@
+/**
+ * IntelliFill Content Script
+ */
+
 (async () => {
 
     console.log("🚀 IntelliFill Started");
-
-    // ============================
-    // Load Profile
-    // ============================
 
     const loaded = await initializeProfile();
 
@@ -15,26 +15,32 @@
 
     console.log("✅ Profile Loaded");
 
-    console.table(getProfile());
+    // Process current page
+    processCurrentPage();
 
-    // ============================
-    // Detect Fields
-    // ============================
+    // Observe dynamically loaded forms
+    observeFormChanges(() => {
+
+        console.log("🔄 Dynamic Form Changed");
+
+        processCurrentPage();
+
+    });
+
+})();
+
+function processCurrentPage() {
 
     const fields = detectFormFields();
 
-    // ============================
-    // Classify Fields
-    // ============================
+    if (!fields.length) {
+        return;
+    }
 
     const classifiedFields = fields.map(field => ({
         ...field,
         classification: classifyField(field)
     }));
-
-    // ============================
-    // Show Classification
-    // ============================
 
     console.table(
         classifiedFields.map(field => ({
@@ -42,65 +48,33 @@
             Name: field.name,
             Type: field.type,
             Classification: field.classification.fieldType,
-            Confidence: field.classification.confidence
+            Value: getProfileValue(field.classification.fieldType)
         }))
     );
 
-    // ============================
-    // Mapper Test
-    // ============================
-
-    console.log("========== Mapper Test ==========");
-
     classifiedFields.forEach(field => {
 
-        const value = getProfileValue(field.classification.fieldType);
+        const fieldType = field.classification.fieldType;
 
-        console.log(
-            `${field.classification.fieldType} =>`,
+        if (fieldType === "UNKNOWN") {
+            return;
+        }
+
+        const value = getProfileValue(fieldType);
+
+        if (
+            value === null ||
+            value === undefined ||
+            value === ""
+        ) {
+            return;
+        }
+
+        autofillField(
+            field.element,
             value
         );
 
     });
 
-    // ============================
-    // Autofill Test (FIRST_NAME & LAST_NAME only)
-    // ============================
-
-    console.log("========== Autofill Test ==========");
-
-    classifiedFields.forEach(field => {
-
-        if (
-            field.classification.fieldType === "FIRST_NAME" ||
-            field.classification.fieldType === "LAST_NAME"
-        ) {
-
-            const value = getProfileValue(
-                field.classification.fieldType
-            );
-
-            if (value) {
-
-                autofillField(
-                    field.element,
-                    value
-                );
-
-                console.log(
-                    `✅ Filled ${field.classification.fieldType} : ${value}`
-                );
-
-            }
-
-        }
-
-    });
-
-    // ============================
-    // Observe Dynamic Forms
-    // ============================
-
-    observeFormChanges();
-
-})();
+}

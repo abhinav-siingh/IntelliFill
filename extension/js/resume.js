@@ -33,6 +33,12 @@ async function handleResumeUpload(file) {
         data: arrayBuffer
     };
 
+    // ⭐ Review page ke liye file name profile me bhi save karo
+    profileData.social.resume = file.name;
+
+    // ⭐ Auto save profile
+    await autoSave();
+
     await saveResume(uploadedResume);
 
     showResumeInfo(uploadedResume);
@@ -148,6 +154,9 @@ async function loadSavedResume() {
     if (!resume) return;
 
     uploadedResume = resume;
+
+    // ⭐ Profile me bhi restore karo
+    profileData.social.resume = resume.name;
 
     showResumeInfo(resume);
 
