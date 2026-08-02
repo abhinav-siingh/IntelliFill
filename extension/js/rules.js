@@ -6,7 +6,7 @@
 const FIELD_RULES = {
 
     FULL_NAME: [
-        
+
         "full name",
         "candidate name",
         "applicant name",
@@ -43,11 +43,16 @@ const FIELD_RULES = {
     ],
 
     DOB: [
-        "dob",
-        "date of birth",
-        "birth date",
-        "birthday"
-    ],
+    "dob",
+    "date of birth",
+    "birth date",
+    "birthday",
+    "birth",
+    "date",
+    "dd/mm/yyyy",
+    "dd-mm-yyyy",
+    "yyyy-mm-dd"
+],
 
     GENDER: [
         "gender",
@@ -82,5 +87,15 @@ const FIELD_RULES = {
         "postal code",
         "zip",
         "zip code"
+    ],
+    DECLARATION: [
+        "declaration",
+        "i declare",
+        "i hereby declare",
+        "agree",
+        "accept",
+        "terms",
+        "terms and conditions",
+        "terms & conditions"
     ]
 };

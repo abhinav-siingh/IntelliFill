@@ -110,8 +110,9 @@ function detectFormFields() {
         }
 
         fields.push({
-       
+
             element: element,
+
             tag: element.tagName.toLowerCase(),
 
             type: element.type || "",
@@ -124,21 +125,17 @@ function detectFormFields() {
 
             placeholder: element.placeholder || "",
 
+            inputMode: element.inputMode || "",
+
+            pattern: element.pattern || "",
+
             required: element.required || false,
 
             disabled: element.disabled || false,
 
             readOnly: element.readOnly || false,
 
-            visible: element.offsetParent !== null,
-
-            autoComplete: element.autocomplete || "",
-
-            maxLength: element.maxLength,
-
-            minLength: element.minLength,
-
-            value: element.value || ""
+            visible: element.offsetParent !== null
 
         });
 

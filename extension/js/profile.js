@@ -15,7 +15,8 @@ const profileData = {
         motherName: "",
 
         email: "",
-        phone: ""
+        phone: "",
+        declaration: true
 
     },
 
@@ -247,6 +248,7 @@ async function initializeProfile() {
             profileData.personal,
             savedData.personal || {}
         );
+        
 
         Object.assign(
             profileData.address,

@@ -31,6 +31,10 @@ function autofillField(element, value) {
 
                 fillRadio(element, value);
 
+            } else if (element.type === "checkbox") {
+
+                fillCheckbox(element, value);
+
             } else {
 
                 fillInput(element, value);
@@ -127,6 +131,100 @@ function fillRadio(element, value) {
     }
 
 }
+
+/**
+ * Fill Checkbox
+ */
+function fillCheckbox(element, value) {
+
+    if (value === true) {
+
+        element.checked = true;
+
+        triggerEvents(element);
+
+    }
+
+}
+
+/**
+ * Match Dropdown Option
+ */
+function findMatchingOption(options, value) {
+
+    const profileValue =
+        value.toString().trim().toLowerCase();
+
+    // 1. Exact Match
+    let matched = options.find(option => {
+
+        const text = option.text.trim().toLowerCase();
+        const val = option.value.trim().toLowerCase();
+
+        return text === profileValue || val === profileValue;
+
+    });
+
+    if (matched) {
+        return matched;
+    }
+
+    // 2. Alias Match
+    for (const [key, aliases] of Object.entries(VALUE_ALIASES)) {
+
+        const allValues = [
+            key.toLowerCase(),
+            ...aliases.map(a => a.toLowerCase())
+        ];
+
+        if (!allValues.includes(profileValue)) {
+            continue;
+        }
+
+        matched = options.find(option => {
+
+            const text = option.text.trim().toLowerCase();
+            const val = option.value.trim().toLowerCase();
+
+            return allValues.includes(text) ||
+                allValues.includes(val);
+
+        });
+
+        if (matched) {
+            return matched;
+        }
+
+    }
+
+    // 3. Contains Match
+    matched = options.find(option => {
+
+        const text = option.text.trim().toLowerCase();
+
+        return text.includes(profileValue) ||
+            profileValue.includes(text);
+
+    });
+
+    if (matched) {
+        return matched;
+    }
+
+    // 4. StartsWith Match
+    matched = options.find(option => {
+
+        const text = option.text.trim().toLowerCase();
+
+        return text.startsWith(profileValue) ||
+            profileValue.startsWith(text);
+
+    });
+
+    return matched || null;
+
+}
+
 /**
  * Fill Select Dropdown
  */
@@ -137,27 +235,18 @@ function fillSelect(element, value) {
     const normalizedValue =
         value.toString().trim().toLowerCase();
 
-    const matchedOption = options.find(option => {
+    const matchedOption = findMatchingOption(
+        options,
+        value
+    );
 
-        const optionText =
-            option.text.trim().toLowerCase();
+    if (!matchedOption) {
+        return;
+    }
 
-        const optionValue =
-            option.value.trim().toLowerCase();
+    element.value = matchedOption.value;
 
-        return (
-
-            optionText === normalizedValue ||
-
-            optionValue === normalizedValue ||
-
-            optionText.includes(normalizedValue) ||
-
-            normalizedValue.includes(optionText)
-
-        );
-
-    });
+    triggerEvents(element);
 
     if (!matchedOption) {
         return;

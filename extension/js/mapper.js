@@ -34,6 +34,9 @@ function getProfileValue(fieldType) {
         case "GENDER":
             return profile.personal?.gender || null;
 
+        case "DECLARATION":
+            return true;
+
         case "FATHER_NAME":
             return profile.personal?.fatherName || null;
 
