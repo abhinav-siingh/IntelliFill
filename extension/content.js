@@ -42,15 +42,7 @@ function processCurrentPage() {
         classification: classifyField(field)
     }));
 
-    console.table(
-        classifiedFields.map(field => ({
-            Label: field.label,
-            Name: field.name,
-            Type: field.type,
-            Classification: field.classification.fieldType,
-            Value: getProfileValue(field.classification.fieldType)
-        }))
-    );
+    
 
     classifiedFields.forEach(field => {
 
@@ -69,6 +61,8 @@ function processCurrentPage() {
         ) {
             return;
         }
+
+       
 
         autofillField(
             field.element,

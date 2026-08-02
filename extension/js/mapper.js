@@ -52,6 +52,15 @@ function getProfileValue(fieldType) {
         case "COUNTRY":
             return profile.address?.country || null;
 
+        case "MARITAL_STATUS":
+            return profile.personal?.maritalStatus || null;
+
+        case "CATEGORY":
+            return profile.personal?.category || null;
+
+        case "HIGHEST_QUALIFICATION":
+            return profile.education?.highestQualification || null;
+
         case "PINCODE":
             return profile.address?.pinCode || profile.address?.pincode || null;
 

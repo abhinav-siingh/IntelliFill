@@ -10,7 +10,11 @@ function autofillField(element, value) {
     }
 
     // Don't overwrite existing values
+    // Don't overwrite existing values
+    // Skip this check for radio & checkbox
     if (
+        element.type !== "radio" &&
+        element.type !== "checkbox" &&
         element.value &&
         element.value.toString().trim() !== ""
     ) {
@@ -21,19 +25,19 @@ function autofillField(element, value) {
 
     switch (tag) {
 
-    case "input":
+        case "input":
 
-        if (element.type === "radio") {
+            if (element.type === "radio") {
 
-            fillRadio(element, value);
+                fillRadio(element, value);
 
-        } else {
+            } else {
 
-            fillInput(element, value);
+                fillInput(element, value);
 
-        }
+            }
 
-        break;
+            break;
 
         case "textarea":
             fillTextarea(element, value);
@@ -66,19 +70,55 @@ function fillInput(element, value) {
 /**
  * Fill Radio Button
  */
+/**
+ * Fill Radio Button
+ */
 function fillRadio(element, value) {
 
-    const radioText = (
-        element.value +
-        " " +
-        element.id +
-        " " +
-        element.name
-    ).toLowerCase();
+    const profileValue =
+        value.toString().trim().toLowerCase();
 
-    const profileValue = value.toString().toLowerCase();
+    let labelText = "";
 
-    if (radioText.includes(profileValue)) {
+    // Label linked using "for"
+    if (element.id) {
+
+        const label = document.querySelector(
+            `label[for="${element.id}"]`
+        );
+
+        if (label) {
+            labelText = label.innerText;
+        }
+
+    }
+
+    // Parent label
+    if (!labelText) {
+
+        const parentLabel = element.closest("label");
+
+        if (parentLabel) {
+            labelText = parentLabel.innerText;
+        }
+
+    }
+
+    const searchableText = (
+        (element.value || "") +
+        " " +
+        (element.name || "") +
+        " " +
+        (labelText || "")
+    )
+        .toLowerCase()
+        .trim();
+
+    const matched = searchableText
+        .split(/\s+/)
+        .some(word => word === profileValue);
+
+    if (matched) {
 
         element.checked = true;
 
@@ -87,20 +127,6 @@ function fillRadio(element, value) {
     }
 
 }
-
-/**
- * Fill Textarea
- */
-function fillTextarea(element, value) {
-
-    element.focus();
-
-    element.value = value;
-
-    triggerEvents(element);
-
-}
-
 /**
  * Fill Select Dropdown
  */
