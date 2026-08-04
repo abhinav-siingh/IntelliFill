@@ -95,6 +95,8 @@ const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 
 function renderStep(errors = {}) {
+    nextBtn.style.display = "inline-block";
+    prevBtn.style.display = "inline-block";
 
     const step = steps[currentStep - 1];
 
@@ -135,6 +137,31 @@ function renderStep(errors = {}) {
 
     document.getElementById("stepSubtitle").textContent =
         `Step ${currentStep} of ${steps.length}`;
+
+}
+function openAIAssistant() {
+
+    formContainer.innerHTML = renderAIAssistant();
+    initializeAIAssistant();
+    console.log("AI Assistant Initialized");
+    // Header
+    document.getElementById("stepTitle").textContent =
+        "🤖 AI Assistant";
+
+    document.getElementById("stepSubtitle").textContent =
+        "Configure Gemini AI for intelligent autofill.";
+
+    // Hide navigation buttons
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+
+    // Active sidebar
+    document.querySelectorAll(".navItem")
+        .forEach(btn => btn.classList.remove("active", "completed"));
+
+    document
+        .getElementById("aiAssistantBtn")
+        .classList.add("active");
 
 }
 
@@ -228,9 +255,35 @@ document.querySelectorAll(".navItem").forEach(item => {
 
     item.addEventListener("click", () => {
 
-        const step = Number(item.dataset.step) + 1;
+        // AI Assistant
+        if (item.id === "aiAssistantBtn") {
 
-        currentStep = step;
+            formContainer.innerHTML = renderAIAssistant();
+initializeAIAssistant();
+            document.getElementById("stepTitle").textContent =
+                "AI Assistant";
+
+            document.getElementById("stepSubtitle").textContent =
+                "Configure Gemini AI for intelligent autofill.";
+
+            prevBtn.style.display = "none";
+            nextBtn.style.display = "none";
+
+           document.querySelectorAll(".navItem")
+                .forEach(btn =>
+                    btn.classList.remove("active", "completed")
+                );
+
+            item.classList.add("active");
+
+            return;
+        }
+
+         if (!item.dataset.step) {
+            return;
+        }
+
+        currentStep = Number(item.dataset.step) + 1;
 
         renderStep();
 
@@ -248,7 +301,7 @@ async function initializeProfile() {
             profileData.personal,
             savedData.personal || {}
         );
-        
+
 
         Object.assign(
             profileData.address,

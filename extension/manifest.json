@@ -3,35 +3,51 @@
   "name": "IntelliFill",
   "version": "1.0.0",
   "description": "AI-Powered Intelligent Web Form Detection and Auto-Filling System",
+
   "action": {
     "default_title": "IntelliFill",
     "default_popup": "popup.html"
   },
+
   "permissions": [
     "storage",
     "activeTab",
     "scripting"
   ],
+
   "host_permissions": [
     "<all_urls>"
   ],
+
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-"js": [
-    "js/storage.js",
-    "js/profileLoader.js",
-    "js/mapper.js",
-    "js/rules.js",
-    "js/classifier.js",
-    "js/aliases.js",
-    "js/dateFormatter.js",
-    "js/detector.js",
-    "js/autofill.js",
-    "content.js"
-],
+
+      "js": [
+
+        "js/storage.js",
+        "js/aiStorage.js",
+
+        "js/profileLoader.js",
+
+        "js/mapper.js",
+        "js/rules.js",
+        "js/classifier.js",
+
+        "js/geminiClient.js",
+
+        "js/aliases.js",
+        "js/dateFormatter.js",
+
+        "js/detector.js",
+        "js/autofill.js",
+
+        "content.js"
+
+      ],
+
       "run_at": "document_idle"
     }
   ]

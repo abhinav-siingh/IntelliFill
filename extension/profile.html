@@ -8,6 +8,7 @@
     <title>IntelliFill Profile</title>
 
     <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="aiAssistant.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,109 +16,125 @@
 
 <body>
 
-<div class="dashboard">
+    <div class="dashboard">
 
-    <!-- Sidebar -->
+        <!-- Sidebar -->
 
-    <aside class="sidebar">
+        <aside class="sidebar">
 
-        <div class="brand">
+            <div class="brand">
 
-            <div class="brandLogo">⚡</div>
+                <div class="brandLogo">⚡</div>
 
-            <div>
+                <div>
 
-                <h2>IntelliFill</h2>
+                    <h2>IntelliFill</h2>
 
-                <span>Profile Setup</span>
+                    <span>Profile Setup</span>
 
-            </div>
-
-        </div>
-
-        <nav>
-
-            <button class="navItem active" data-step="0">👤 Personal</button>
-
-            <button class="navItem" data-step="1">📍 Address</button>
-
-            <button class="navItem" data-step="2">🎓 Education</button>
-
-            <button class="navItem" data-step="3">💼 Career</button>
-
-            <button class="navItem" data-step="4">🌐 Social</button>
-
-            <button class="navItem" data-step="5">✅ Review</button>
-
-
-        </nav>
-
-    </aside>
-
-
-    <!-- Main -->
-
-    <main class="content">
-
-        <header class="topBar">
-
-            <div>
-
-                <h1 id="stepTitle">
-                    Personal Information
-                </h1>
-
-                <p id="stepSubtitle">
-                    Complete your profile for AI powered autofill.
-                </p>
+                </div>
 
             </div>
 
-            <div class="saveStatus">
+            <nav>
 
-                <span class="dot"></span>
+                <button class="navItem active" data-step="0">👤 Personal</button>
 
-                Auto Saved
+                <button class="navItem" data-step="1">📍 Address</button>
 
-            </div>
+                <button class="navItem" data-step="2">🎓 Education</button>
 
-        </header>
+                <button class="navItem" data-step="3">💼 Career</button>
+
+                <button class="navItem" data-step="4">🌐 Social</button>
+
+                <button class="navItem" data-step="5">✅ Review</button>
+
+                <hr class="sidebarDivider">
+
+                <button class="navItem aiNavItem" id="aiAssistantBtn">
+
+                    <span class="aiPulse"></span>
+
+                    <span>🤖 AI Assistant</span>
+
+                    <span class="newBadge">NEW</span>
+
+                </button>
+
+            </nav>
+
+        </aside>
 
 
-        <!-- Dynamic Form -->
+        <!-- Main -->
 
-        <section class="formCard">
+        <main class="content">
 
-            <div id="formContainer"></div>
+            <header class="topBar">
 
-        </section>
+                <div>
+
+                    <h1 id="stepTitle">
+                        Personal Information
+                    </h1>
+
+                    <p id="stepSubtitle">
+                        Complete your profile for AI powered autofill.
+                    </p>
+
+                </div>
+
+                <div class="saveStatus">
+
+                    <span class="dot"></span>
+
+                    Auto Saved
+
+                </div>
+
+            </header>
 
 
-        <!-- Footer -->
+            <!-- Dynamic Form -->
 
-        <footer class="footerBar">
+            <section class="formCard">
 
-            <button id="prevBtn">
-                ← Previous
-            </button>
+                <div id="formContainer"></div>
 
-            <button id="nextBtn" class="primaryBtn">
-                Next →
-            </button>
+            </section>
 
-        </footer>
 
-    </main>
+            <!-- Footer -->
 
-</div>
+            <footer class="footerBar">
 
-<script src="js/storage.js"></script>
-<script src="js/database.js"></script>
-<script src="js/validation.js"></script>
-<script src="js/steps.js"></script>
-<script src="js/renderer.js"></script>
-<script src="js/resume.js"></script>
-<script src="js/profile.js"></script>
+                <button id="prevBtn">
+                    ← Previous
+                </button>
+
+                <button id="nextBtn" class="primaryBtn">
+                    Next →
+                </button>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/steps.js"></script>
+    <script src="js/renderer.js"></script>
+
+    <!-- NEW -->
+    <script src="js/aiAssistant.js"></script>
+    <script src="js/aiStorage.js"></script>
+    <script src="js/geminiClient.js"></script>
+    <script src="js/resume.js"></script>
+    <script src="js/profile.js"></script>
 
 </body>
 
