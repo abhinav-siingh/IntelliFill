@@ -1,120 +1,978 @@
-/* ===========================
-   AI Assistant
-=========================== */
+/* ==========================================
+   IntelliFill AI Assistant
+   Version : 3.0
+========================================== */
+
+/* ==========================================
+   Root
+========================================== */
 
 .aiAssistantPage{
+
+    width:100%;
+
+    max-width:none;
+
+    margin:0;
+
+    padding:0;
 
     display:flex;
 
     flex-direction:column;
 
-    gap:24px;
+    gap:20px;
 
 }
 
-/* Hero */
+/* ==========================================
+   Hero
+========================================== */
 
 .aiHero{
 
-    background:linear-gradient(135deg,#4F46E5,#7C3AED);
+    background:linear-gradient(
+        135deg,
+        #5B21B6,
+        #7C3AED
+    );
 
-    border-radius:18px;
+    border-radius:24px;
 
-    padding:28px;
+    padding:30px;
 
     color:#fff;
 
-    box-shadow:0 15px 35px rgba(99,102,241,.35);
+    box-shadow:
+
+        0 20px 45px rgba(91,33,182,.28);
 
 }
 
-.aiHero h2{
+/* Hero Top */
+
+.heroTop{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+/* Hero Icon */
+
+.heroIcon{
+
+    width:74px;
+
+    height:74px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:38px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.16);
+
+    backdrop-filter:blur(10px);
+
+}
+
+/* Hero Content */
+
+.heroContent{
+
+    flex:1;
+
+}
+
+.heroContent h2{
 
     margin:0;
 
-    font-size:28px;
+    font-size:34px;
+
+    font-weight:700;
 
 }
 
-.aiHero p{
+.heroContent p{
 
-    margin-top:10px;
+    margin-top:8px;
 
-    opacity:.9;
+    color:rgba(255,255,255,.88);
 
     line-height:1.7;
 
+    font-size:15px;
+
 }
 
-/* Card */
+.heroBadge{
 
-.aiCard{
+    display:inline-flex;
+
+    align-items:center;
+
+    margin-top:18px;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.16);
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* ==========================================
+   Free API Banner
+========================================== */
+
+.apiBanner{
+
+    margin-top:28px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    background:#FFF6D8;
+
+    border:1px solid #FFE08A;
+
+    border-radius:18px;
+
+    padding:18px 20px;
+
+}
+
+/* Banner Icon */
+
+.bannerIcon{
+
+    width:56px;
+
+    height:56px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:14px;
+
+    font-size:24px;
+
+    background:#FFE08A;
+
+}
+
+/* Banner Text */
+
+.bannerText{
+
+    flex:1;
+
+}
+
+.bannerText h3{
+
+    margin:0;
+
+    color:#7C5200;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.bannerText p{
+
+    margin-top:6px;
+
+    color:#8B6A00;
+
+    line-height:1.6;
+
+}
+/* ==========================================
+   Main Card
+========================================== */
+
+/* ==========================================
+   Main Card
+========================================== */
+
+.aiMainCard{
+
+    width:100%;
+
+    background:#172033;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-shadow:
+
+        0 10px 30px rgba(0,0,0,.30);
+
+}
+
+/* ==========================================
+   Section Header
+========================================== */
+
+.sectionHeader{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
+
+.sectionHeader h3{
+
+    margin:0;
+
+    color:#FFFFFF;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.sectionHeader span{
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:rgba(124,58,237,.18);
+
+    color:#C4B5FD;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.sectionDescription{
+
+    margin-top:10px;
+
+    margin-bottom:24px;
+
+    color:#94A3B8;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   API Input
+========================================== */
+
+.apiInputWrapper{
+
+    display:flex;
+
+    align-items:center;
+
+    background:#0F172A;
+
+    border:2px solid #334155;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    transition:.25s;
+
+}
+
+.apiInputWrapper:hover{
+
+border-color:#6D28D9;
+}
+
+.apiInputWrapper:focus-within{
+
+    border-color:#8B5CF6;
+
+    box-shadow:
+
+        0 0 0 4px rgba(139,92,246,.18);
+
+}
+
+.apiInputWrapper input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    padding:20px;
+
+    color:#FFFFFF;
+
+    font-size:16px;
+
+}
+
+.apiInputWrapper input::placeholder{
+
+ color:#64748B;
+}
+
+/* ==========================================
+   Eye Button
+========================================== */
+
+.iconBtn{
+
+    width:64px;
+
+    height:64px;
+
+    border:none;
+
+    background:transparent;
+
+    color:#94A3B8;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:22px;
+
+}
+
+.iconBtn:hover{
+
+    color:#FFFFFF;
+
+    background:#1E293B;
+
+}
+
+/* ==========================================
+   Input Note
+========================================== */
+
+.inputInfo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:16px;
+
+    color:#22C55E;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+/* ==========================================
+   Quick Setup
+========================================== */
+
+.actionSection{
+
+    margin-top:32px;
+
+}
+
+.actionTitle{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#FFFFFF;
+
+    margin-bottom:18px;
+
+    letter-spacing:.3px;
+
+}
+
+/* ==========================================
+   Button Row
+========================================== */
+
+.buttonRow{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+.buttonRow .btn{
+
+    flex:1;
+
+    height:52px;
+
+    flex-direction:row;
+
+    justify-content:center;
+
+    gap:10px;
+
+    font-size:14px;
+
+}
+
+/* ==========================================
+   Common Button
+========================================== */
+
+.btn{
+color:inherit !important;
+    flex:1;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    color:#FFFFFF;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:all .25s ease;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+}
+
+.btn span{
+
+    font-size:13px;
+
+}
+
+/* ==========================================
+   Get API Key
+========================================== */
+
+.getKeyBtn{
+
+    background:#FEF3C7 !important;
+
+    color:#92400E !important;
+
+    border:1px solid #FCD34D !important;
+
+}
+
+.getKeyBtn:hover{
+
+    background:#FDE68A;
+
+    color:#78350F;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 24px rgba(245,158,11,.25);
+
+}
+
+/* ==========================================
+   Test Connection
+========================================== */
+
+.testBtn{
+
+    background:#DBEAFE !important;
+
+    color:#1E3A8A !important;
+
+    border:1px solid #60A5FA !important;
+
+}
+
+.testBtn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(37,99,235,.45);
+
+}
+
+/* ==========================================
+   Save Settings
+========================================== */
+
+.saveBtn{
+
+    background:#DCFCE7 !important;
+
+    color:#166534 !important;
+
+    border:1px solid #22C55E !important;
+
+}
+
+.saveBtn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(22,163,74,.45);
+
+}
+
+/* ==========================================
+   Status Card
+========================================== */
+
+.statusCard{
+
+    margin-top:26px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px;
+
+    border-radius:18px;
+
+    background:#052E16;
+
+    border:1px solid #16A34A;
+
+}
+
+/* Left */
+
+.statusLeft{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+/* Double Tick */
+
+.statusIcon{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        135deg,
+        #16A34A,
+        #22C55E
+    );
+
+    color:white;
+
+    font-size:28px;
+
+    box-shadow:
+        0 0 18px rgba(34,197,94,.45);
+
+}
+/* Status Text */
+
+.statusContent h3{
+
+    margin:0;
+
+    color:#FFFFFF;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+.statusContent p{
+
+    margin-top:6px;
+
+    color:#BBF7D0;
+
+    line-height:1.6;
+
+    font-size:14px;
+
+}
+
+/* ==========================================
+   Gemini Badge
+========================================== */
+
+.modelBadge{
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:#16A34A;
+
+    color:#FFFFFF;
+
+    font-weight:700;
+
+    font-size:13px;
+
+    animation:geminiPulse 1.5s infinite;
+
+    box-shadow:0 0 10px rgba(34,197,94,.45);
+
+}
+@keyframes geminiPulse{
+
+    0%{
+
+        transform:scale(1);
+
+        box-shadow:0 0 8px rgba(34,197,94,.35);
+
+    }
+
+    50%{
+
+        transform:scale(1.06);
+
+        box-shadow:0 0 20px rgba(34,197,94,.9);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        box-shadow:0 0 8px rgba(34,197,94,.35);
+
+    }
+
+}
+/* ==========================================
+   Help Section
+========================================== */
+
+.helpSection{
+
+    margin-top:32px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+
+}
+
+/* ==========================================
+   Help Card
+========================================== */
+
+.helpCard{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:20px;
+
+    border-radius:18px;
 
     background:#1E293B;
 
     border:1px solid rgba(255,255,255,.08);
 
-    border-radius:16px;
-
-    padding:22px;
+    transition:.25s;
 
 }
 
-.aiCard h3{
+.helpCard:hover{
 
-    margin-bottom:10px;
+    transform:translateY(-4px);
 
-    color:#fff;
+    box-shadow:
+
+        0 18px 35px rgba(15,23,42,.12);
 
 }
 
-.aiCard p{
+.helpIcon{
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+    background:#F3F4F6;
+
+}
+
+.helpContent{
+
+    flex:1;
+
+}
+
+.helpContent h4{
+
+    margin:0;
+
+    color:#FFFFFF;
+
+    font-size:16px;
+
+    font-weight:700;
+
+}
+
+.helpContent p{
+
+    margin-top:6px;
 
     color:#94A3B8;
 
     line-height:1.6;
 
-}
-/* ===========================
-   Toast
-=========================== */
+    font-size:13px;
 
-#toast{
+}
+
+.helpAction{
+
+    border:none;
+
+    background:#FEF3C7;
+
+    color:#92400E;
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.25s;
+
+    border:1px solid #FCD34D;
+
+}
+
+.helpAction:hover{
+
+    background:#FDE68A;
+
+    color:#78350F;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(245,158,11,.20);
+
+}
+
+/* ==========================================
+   Footer Note
+========================================== */
+
+.footerNote{
+
+    margin-top:28px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:14px;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    background:#F8FAFC;
+
+    border:1px solid #E2E8F0;
+
+    color:#475569;
+
+    line-height:1.7;
+
+    font-size:14px;
+
+}
+
+.footerIcon{
+
+    font-size:20px;
+
+}
+
+/* ==========================================
+   Toast
+========================================== */
+
+.toast{
 
     position:fixed;
 
-    top:25px;
+    top:24px;
 
-    right:25px;
+    right:24px;
+
+    min-width:260px;
+
+    padding:14px 20px;
 
     background:#16A34A;
 
     color:#fff;
 
-    padding:14px 20px;
-
-    border-radius:10px;
+    border-radius:12px;
 
     font-weight:600;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    box-shadow:
+
+        0 12px 30px rgba(0,0,0,.18);
 
     opacity:0;
 
-    transform:translateY(-20px);
-
     pointer-events:none;
 
-    transition:.35s;
+    transform:translateY(-20px);
 
-    z-index:99999;
+    transition:.3s;
+
+    z-index:9999;
 
 }
 
-#toast.show{
+.toast.show{
 
     opacity:1;
 
     transform:translateY(0);
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media(max-width:768px){
+
+    .heroTop{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .buttonRow{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:16px;
+
+    margin-top:22px;
+
+}
+
+    .helpSection{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .statusCard{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+
+    }
 
 }
