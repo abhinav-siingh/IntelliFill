@@ -232,12 +232,13 @@ nextBtn.addEventListener("click", () => {
         renderStep();
 
     } else {
+         console.log("Save Profile Clicked");
 
-        alert("Profile Saved Successfully");
+    showSuccessModal();
 
-        console.log(profileData);
+    console.log(profileData);
 
-    }
+}
 
 });
 prevBtn.addEventListener("click", () => {
@@ -290,6 +291,168 @@ initializeAIAssistant();
     });
 
 });
+
+// ======================================
+// Success Modal
+// ======================================
+function showSuccessModal() {
+console.log("showSuccessModal called");
+
+    const oldModal =
+        document.getElementById("successModal");
+
+    if (oldModal) {
+
+        oldModal.remove();
+
+    }
+
+    const modal =
+        document.createElement("div");
+
+    modal.id = "successModal";
+
+    modal.className = "successModal";
+
+    modal.innerHTML = `
+
+        <div class="successCard">
+
+            <button
+                id="closeSuccessModal"
+                class="closeModalBtn">
+
+                ✕
+
+            </button>
+
+            <div class="successIcon">
+
+                🎉
+
+            </div>
+
+            <h2>
+
+                Profile Saved Successfully
+
+            </h2>
+
+            <p class="successText">
+
+                Congratulations!
+
+                <br><br>
+
+                Your IntelliFill profile has been saved securely.
+
+                <br><br>
+
+                You can now use IntelliFill's Rule Engine
+                to autofill supported forms instantly.
+
+            </p>
+
+            <div class="divider"></div>
+
+            <h3>
+
+                🤖 Unlock AI Autofill
+
+            </h3>
+
+            <p class="successText">
+
+                Connect your FREE Gemini API to enable:
+
+                <br><br>
+
+                ✔ Smart Field Detection
+
+                <br>
+
+                ✔ Unknown Field Recognition
+
+                <br>
+
+                ✔ Intelligent Form Understanding
+
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="successButtons">
+
+                <button
+                    id="openAiAssistantBtn"
+                    class="primaryBtn">
+
+                    🤖 Open AI Assistant
+
+                </button>
+
+                <button
+                    id="finishBtn"
+                    class="secondaryBtn">
+
+                    ✅ Finish
+
+                </button>
+
+            </div>
+
+            <small>
+
+                🔒 Your API Key and profile always remain inside your browser.
+
+            </small>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(modal);
+
+    // ===========================
+    // Close Modal
+    // ===========================
+
+    document
+        .getElementById("closeSuccessModal")
+        .addEventListener("click", () => {
+
+            modal.remove();
+
+        });
+
+    // ===========================
+    // Open AI Assistant
+    // ===========================
+
+    document
+        .getElementById("openAiAssistantBtn")
+        .addEventListener("click", () => {
+
+            modal.remove();
+
+            openAIAssistant();
+
+        });
+
+    // ===========================
+    // Finish
+    // ===========================
+
+    document
+        .getElementById("finishBtn")
+        .addEventListener("click", () => {
+
+            window.close();
+
+        });
+
+}
+
 
 async function initializeProfile() {
 

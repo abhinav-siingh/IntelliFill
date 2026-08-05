@@ -2,6 +2,7 @@
  * IntelliFill Content Script
  * Version: 2.0
  */
+let permissionPopupActive = false;
 
 (async () => {
 
@@ -108,6 +109,38 @@ async function processCurrentPage() {
         }))
 
     );
+
+    // ============================
+    // Ask User Permission
+    // ============================
+
+    // Another scan is already waiting for user response
+    if (permissionPopupActive) {
+
+        console.log("⏳ Permission popup already active");
+
+        return;
+
+    }
+
+    permissionPopupActive = true;
+
+    console.log("🔔 Showing autofill permission popup");
+
+    const shouldAutofill =
+        await showAutofillPermission();
+
+    permissionPopupActive = false;
+
+    if (!shouldAutofill) {
+
+        console.log("❌ User cancelled autofill");
+
+        return;
+
+    }
+
+    console.log("✅ User approved autofill");
 
     // ============================
     // Autofill
