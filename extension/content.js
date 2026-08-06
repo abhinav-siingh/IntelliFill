@@ -38,21 +38,33 @@ let permissionPopupActive = false;
  * Scan Current Page
  */
 
-async function processCurrentPage() {
+async function processCurrentPage(isManual = false) {
+    const fields =
+        detectFormFields();
 
-    const fields = detectFormFields();
     const aiSettings =
         await loadAISettings();
 
-    console.log("AI SETTINGS", aiSettings);
+    console.log(
+        "AI SETTINGS",
+        aiSettings
+    );
+
     if (!fields.length) {
 
-        console.log("No Form Fields Found");
+        console.log(
+            "❌ No Form Found"
+        );
+
+        if (isManual) {
+
+            showNoFormPopup();
+
+        }
 
         return;
 
     }
-
     const classifiedFields = [];
 
     // ============================
@@ -109,6 +121,29 @@ async function processCurrentPage() {
         }))
 
     );
+
+    // ============================
+    // Check Real Form
+    // ============================
+
+    const detectedFields = classifiedFields.filter(field => {
+
+        return field.classification.fieldType !== "UNKNOWN";
+
+    });
+
+    console.log(
+        `🎯 Valid Fields Detected: ${detectedFields.length}`
+    );
+
+    // Ignore pages having less than 2 useful fields
+    if (detectedFields.length < 2) {
+
+        console.log("❌ No Supported Form");
+
+        return false;
+
+    }
 
     // ============================
     // Ask User Permission
@@ -197,5 +232,100 @@ async function processCurrentPage() {
         `🎉 IntelliFill Completed (${classifiedFields.length} fields)`
 
     );
+    return true;
+}
+// ==========================================
+// Listen From Popup
+// ==========================================
+
+chrome.runtime.onMessage.addListener(
+
+    async (message, sender, sendResponse) => {
+
+        if (message.action !== "START_AUTOFILL") {
+
+            return;
+
+        }
+
+        const result =
+            await processCurrentPage(true);
+
+        sendResponse({
+
+            found: result
+
+        });
+
+        return true;
+
+    }
+
+);
+// ==========================================
+// No Supported Form Popup
+// ==========================================
+
+function showNoFormPopup() {
+    console.log("🔥 showNoFormPopup Called");
+    const oldPopup =
+        document.getElementById("ifNoFormPopup");
+
+    if (oldPopup) {
+
+        oldPopup.remove();
+
+    }
+
+    const popup =
+        document.createElement("div");
+
+    popup.id = "ifNoFormPopup";
+    popup.style.position = "fixed";
+
+    popup.style.top = "20px";
+
+    popup.style.right = "20px";
+
+    popup.style.zIndex = "999999";
+
+    popup.innerHTML = `
+
+        <div class="ifPopup">
+
+            <div class="ifIcon">
+
+                ❌
+
+            </div>
+
+            <h3>
+
+                No Supported Form
+
+            </h3>
+
+            <p>
+
+                This page doesn't contain a supported
+                registration or application form.
+
+            </p>
+
+        </div>
+
+    `;
+
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+
+        if (document.body.contains(popup)) {
+
+            popup.remove();
+
+        }
+
+    }, 3000);
 
 }
