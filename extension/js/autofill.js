@@ -13,6 +13,7 @@ function autofillField(element, value) {
     // Don't overwrite existing values
     // Skip this check for radio & checkbox
     if (
+        element.tagName.toLowerCase() !== "select" &&
         element.type !== "radio" &&
         element.type !== "checkbox" &&
         element.value &&
@@ -232,15 +233,16 @@ function fillSelect(element, value) {
 
     const options = [...element.options];
 
-    const normalizedValue =
-        value.toString().trim().toLowerCase();
-
     const matchedOption = findMatchingOption(
         options,
         value
     );
 
     if (!matchedOption) {
+        console.log(
+            "❌ No matching dropdown option:",
+            value
+        );
         return;
     }
 
@@ -248,14 +250,10 @@ function fillSelect(element, value) {
 
     triggerEvents(element);
 
-    if (!matchedOption) {
-        return;
-    }
-
-    element.value = matchedOption.value;
-
-    triggerEvents(element);
-
+    console.log(
+        "✅ Dropdown Selected:",
+        matchedOption.text
+    );
 }
 
 /**

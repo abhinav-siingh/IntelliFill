@@ -482,16 +482,27 @@ async function initializeAIAssistant() {
     // Get Free API Key
     // =====================================
 
-    document
-        .getElementById("getApiKeyBtn")
-        ?.addEventListener("click", () => {
+   // ===========================
+// Get Free API Key
+// ===========================
 
-           window.open(
-    "https://github.com/yourusername/intellifill/wiki",
-    "_blank"
-);
+const getApiKeyBtn =
+    document.getElementById("getApiKeyBtn");
+
+if (getApiKeyBtn) {
+
+    getApiKeyBtn.addEventListener("click", () => {
+
+        chrome.tabs.create({
+
+            url:
+                "https://aistudio.google.com/app/apikey"
 
         });
+
+    });
+
+}
 
     // =====================================
     // Save Settings
@@ -657,7 +668,7 @@ async function initializeAIAssistant() {
 
         });
 
- // ===========================
+// ===========================
 // Setup Guide
 // ===========================
 
@@ -668,13 +679,12 @@ if (setupGuideBtn) {
 
     setupGuideBtn.addEventListener("click", () => {
 
-        window.open(
+        chrome.tabs.create({
 
-            "https://your-guide-link.com",
+            url:
+                "https://www.getmaxim.ai/bifrost/guides/api-keys/how-to-get-a-gemini-api-key"
 
-            "_blank"
-
-        );
+        });
 
     });
 
