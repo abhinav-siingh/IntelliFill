@@ -1,0 +1,35 @@
+# ===== Server =====
+server.port=8080
+
+# ===== MySQL Connection =====
+# Change username/password to match your local MySQL setup
+spring.datasource.url=jdbc:mysql://localhost:3306/intellifill_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=----YOUR-MySQL-PASSWORD-----
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# ===== JPA / Hibernate =====
+# update = auto-creates/updates tables from entities. Safe for development.
+# We will switch this to 'validate' later once schema is stable (Phase 12 - production cleanup).
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# ===== Logging =====
+logging.level.com.intellifill=DEBUG
+
+# ===== Gemini AI (shared fallback key) =====
+# Used ONLY when the extension does not send its own user-supplied key.
+# NEVER commit a real key here - keep this file out of version control,
+# or better, set it as an environment variable instead of a plain property.
+# Model selection is fully automatic (see GeminiService.resolveBestModel) -
+# no model name to configure or maintain here anymore.
+gemini.api-key=-----GIVE-YOUR-GEMINI-API-HERE-----
+
+# ===== JWT =====
+# IMPORTANT: change this secret before going to production. Keep it long and random.
+# This value must NEVER be sent to the Chrome Extension or committed publicly.
+jwt.secret=change_this_to_a_very_long_random_secret_string_at_least_32_chars
+# Token validity: 30 days, in milliseconds (30 * 24 * 60 * 60 * 1000)
+jwt.expiration-ms=2592000000
