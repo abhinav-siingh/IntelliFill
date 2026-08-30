@@ -7,7 +7,7 @@
 
 body {
     width: 320px;
-    min-height: 430px;
+    min-height: 400px;
     background: #0f172a;
     color: white;
     margin: 5;
@@ -16,7 +16,7 @@ body {
 
 .popup{
     width:100%;
-    min-height:430px;
+    min-height:400px;
 
     background:#111827;
 
@@ -34,7 +34,7 @@ header{
     display:flex;
     align-items:center;
     gap:12px;
-    margin-bottom:18px;
+    margin-bottom:14px;
 }
 
 .logo{
@@ -112,7 +112,7 @@ header p {
 
     border-radius:14px;
 
-    margin-bottom:18px;
+    margin-bottom:14px;
 
 }
 
@@ -122,7 +122,7 @@ header p {
 
     flex-direction: column;
 
-    gap: 14px;
+    gap: 10px;
 
 }
 
@@ -166,7 +166,7 @@ header p {
 
 footer {
 
-    margin-top: 28px;
+    margin-top: 16px;
 
     display: flex;
 
@@ -189,5 +189,189 @@ footer {
     background: #22c55e;
 
     border-radius: 50%;
+
+}
+
+/* ================= Backend Account (Auth) ================= */
+
+.authCard {
+
+    padding: 12px 14px;
+
+    border-radius: 14px;
+
+    margin-bottom: 14px;
+
+}
+
+.authCard h3 {
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+
+    color: #cbd5e1;
+
+    font-weight: 600;
+
+}
+
+.authInput {
+
+    width: 100%;
+
+    padding: 8px 10px;
+
+    margin-bottom: 8px;
+
+    border-radius: 8px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: #0f172a;
+
+    color: white;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: border-color .2s;
+
+}
+
+.authInput:focus {
+
+    border-color: #8b5cf6;
+
+}
+
+.authInput::placeholder {
+
+    color: #64748b;
+
+}
+
+.authActions {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+.authBtn {
+
+    flex: 1;
+
+    height: 32px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.authBtnPrimary {
+
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+
+    color: white;
+
+}
+
+.authBtnPrimary:hover {
+
+    filter: brightness(1.1);
+
+}
+
+.authBtnSecondary {
+
+    background: #334155;
+
+    color: #e2e8f0;
+
+}
+
+.authBtnSecondary:hover {
+
+    background: #475569;
+
+}
+
+.authError {
+
+    color: #f87171;
+
+    font-size: 11px;
+
+    margin-top: 6px;
+
+    min-height: 13px;
+
+}
+
+.loggedInRow {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+}
+
+.loggedInEmail {
+
+    font-size: 12px;
+
+    color: #cbd5e1;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+.logoutBtnSmall {
+
+    background: #334155;
+
+    color: #e2e8f0;
+
+    border: none;
+
+    padding: 6px 12px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition: .2s;
+
+}
+
+.logoutBtnSmall:hover {
+
+    background: #ef4444;
 
 }

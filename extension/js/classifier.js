@@ -222,14 +222,24 @@ async function classifyField(field, aiSettings = null) {
         // =====================================
         // AI Disabled
         // =====================================
+        //
+        // Original rule: no personal Gemini key connected -> skip AI entirely.
+        // New rule: if the user IS logged into the backend, they can still
+        // get AI classification via the backend's shared key, even without
+        // their own key connected - so we only apply the old strict check
+        // when there's no backend session at all.
+
+        const authSession = await loadAuthSession();
+        const hasBackendSession = !!(authSession && authSession.token);
 
         if (
-
-            !aiSettings ||
-            !aiSettings.connected ||
-            !aiSettings.apiKey ||
-            !aiSettings.model
-
+            !hasBackendSession &&
+            (
+                !aiSettings ||
+                !aiSettings.connected ||
+                !aiSettings.apiKey ||
+                !aiSettings.model
+            )
         ) {
 
             return bestMatch;
@@ -294,18 +304,29 @@ async function classifyField(field, aiSettings = null) {
         });
 
         // =====================================
-        // Gemini Classification
+        // Classification (Backend first, direct Gemini as fallback)
         // =====================================
+        //
+        // If the user is logged into the IntelliFill backend, we route
+        // through it: it checks a PERMANENT shared cache first (so the
+        // same field label is never re-classified, even across page
+        // reloads or other users), then falls back to Gemini only on a
+        // genuine cache miss. If the user hasn't logged in yet, we fall
+        // back to the original direct-Gemini behavior unchanged.
 
-        const aiResult = await classifyUnknownField(
+        const aiResult = hasBackendSession
+            ? await classifyFieldViaBackend(
+                field,
+                aiSettings?.apiKey,
+                authSession.token
+            )
+            : await classifyUnknownField(
+                field,
+                aiSettings.apiKey,
+                aiSettings.model
+            );
 
-            field,
-            aiSettings.apiKey,
-            aiSettings.model
-
-        );
-
-        console.log("Gemini Response", aiResult);
+        console.log("Classification Response", aiResult);
 
         // -------------------------------
         // Gemini Failed

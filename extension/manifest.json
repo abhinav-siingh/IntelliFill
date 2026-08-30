@@ -13,7 +13,8 @@
     "scripting"
   ],
   "host_permissions": [
-    "<all_urls>"
+    "<all_urls>",
+    "http://localhost:8080/*"
   ],
   "content_scripts": [
     {
@@ -26,6 +27,8 @@
       "js": [
         "js/storage.js",
         "js/aiStorage.js",
+        "js/authStorage.js",
+        "js/backendClient.js",
         "js/profileLoader.js",
         "js/mapper.js",
         "js/rules.js",

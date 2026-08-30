@@ -9,21 +9,38 @@ const GEMINI_API_BASE =
     "https://generativelanguage.googleapis.com/v1beta";
 
 /**
- * Preferred Models
- * IntelliFill will automatically choose
- * the best available model.
+ * Dynamic Model Ranking
+ * No hardcoded model names to maintain - Google deprecates and
+ * introduces models often, so instead of a fixed list, we score
+ * whatever models the API actually reports as available right now:
+ *   - "-latest" aliases score highest, since Google keeps these
+ *     pointed at their current recommended model automatically
+ *   - "flash" models are preferred over "pro" (faster/cheaper,
+ *     sufficient for simple field classification)
+ *   - within the same tier, the highest version number wins
  */
-const PREFERRED_MODELS = [
 
-    "gemini-2.5-flash",
+function extractVersion(name) {
 
-    "gemini-flash-latest",
+    const match = name.match(/(\d+(\.\d+)?)/);
 
-    "gemini-2.5-pro",
+    return match ? parseFloat(match[1]) : 0;
 
-    "gemini-2.0-flash"
+}
 
-];
+function rankModel(name) {
+
+    let score = 0;
+
+    if (name.includes("latest")) score += 1000;
+
+    if (name.includes("flash")) score += 100;
+
+    score += extractVersion(name);
+
+    return score;
+
+}
 
 /**
  * Generic Gemini Request
@@ -134,45 +151,29 @@ async function verifyApiKey(apiKey) {
 }
 /**
  * Automatically Select Best Model
+ * @param excludeModel - optionally skip a model that just failed
+ *                        (used by the self-healing retry below)
  */
 
-function selectBestModel(models) {
+function selectBestModel(models, excludeModel = null) {
 
     const supportedModels =
         models.filter(model =>
             model.supportedGenerationMethods &&
             model.supportedGenerationMethods.includes(
                 "generateContent"
-            )
+            ) &&
+            model.name.replace("models/", "") !== excludeModel
         );
 
-    for (const preferred of PREFERRED_MODELS) {
+    if (!supportedModels.length) return null;
 
-        const found =
-            supportedModels.find(model =>
-                model.name.replace(
-                    "models/",
-                    ""
-                ) === preferred
-            );
+    supportedModels.sort((a, b) =>
+        rankModel(b.name.replace("models/", "")) -
+        rankModel(a.name.replace("models/", ""))
+    );
 
-        if (found) {
-
-            return found.name.replace(
-                "models/",
-                ""
-            );
-
-        }
-
-    }
-
-    return supportedModels.length
-        ? supportedModels[0].name.replace(
-            "models/",
-            ""
-        )
-        : null;
+    return supportedModels[0].name.replace("models/", "");
 
 }
 /**
@@ -283,7 +284,13 @@ async function generateContent(
 
                     }
 
-                ]
+                ],
+
+                generationConfig: {
+
+                    temperature: 0
+
+                }
 
             })
 
@@ -322,6 +329,30 @@ async function generateContent(
                 success: false,
 
                 message: "INVALID_API_KEY"
+
+            };
+
+        }
+
+        if (result.status === 404) {
+
+            return {
+
+                success: false,
+
+                message: "MODEL_UNAVAILABLE"
+
+            };
+
+        }
+
+        if (result.status === 503) {
+
+            return {
+
+                success: false,
+
+                message: "SERVER_OVERLOADED"
 
             };
 
@@ -449,7 +480,7 @@ No markdown.
 
 `;
 
-    const result = await generateContent(
+    let result = await generateContent(
 
         apiKey,
 
@@ -458,6 +489,43 @@ No markdown.
         prompt
 
     );
+
+    // 503 = Google's servers are transiently overloaded (common with
+    // newer "thinking" models under high demand) - NOT a real failure.
+    // Retry a couple of times with a short pause before giving up.
+
+
+    // Self-healing: the saved model may have been deprecated by Google
+    // since it was last selected (this happens more often than you'd
+    // expect). Instead of failing, re-check what's actually available
+    // right now, pick a fresh model, and retry once.
+    if (!result.success && result.message === "MODEL_UNAVAILABLE") {
+
+        console.warn(`Model "${model}" is no longer available - re-selecting automatically...`);
+
+        const verifyResult = await verifyApiKey(apiKey);
+
+        if (verifyResult.success) {
+
+            const newModel = selectBestModel(verifyResult.models, model);
+
+            if (newModel) {
+
+                result = await generateContent(apiKey, newModel, prompt);
+
+                if (result.success) {
+                    // Persist so the next call uses the working model directly,
+                    // without needing to fail-and-retry every time.
+                    const currentSettings = await loadAISettings();
+                    await saveAISettings({ ...currentSettings, model: newModel });
+                    console.log(`✅ Switched to available model: ${newModel}`);
+                }
+
+            }
+
+        }
+
+    }
 
     if (!result.success) {
 

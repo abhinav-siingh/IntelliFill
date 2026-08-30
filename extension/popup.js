@@ -181,3 +181,79 @@ async function updateProfileProgress() {
 }
 
 updateProfileProgress();
+
+// ==========================================
+// Backend Auth (login / register / logout)
+// ==========================================
+
+async function refreshAuthUI() {
+
+    const session = await loadAuthSession();
+
+    const loginCard = document.getElementById("backendLoginCard");
+    const loggedInCard = document.getElementById("backendLoggedInCard");
+    const loggedInEmail = document.getElementById("loggedInEmail");
+
+    if (session && session.token) {
+        loginCard.style.display = "none";
+        loggedInCard.style.display = "block";
+        loggedInEmail.textContent = "🟢 " + (session.email || "Logged in");
+    } else {
+        loginCard.style.display = "block";
+        loggedInCard.style.display = "none";
+    }
+
+}
+
+document
+    .getElementById("loginBtn")
+    .addEventListener("click", async () => {
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        const errorEl = document.getElementById("loginError");
+
+        errorEl.textContent = "";
+
+        try {
+            const result = await backendLogin(email, password);
+            await saveAuthSession(result.token, result.user.email);
+            await refreshAuthUI();
+        } catch (error) {
+            errorEl.textContent = error.message || "Login failed";
+        }
+
+    });
+
+document
+    .getElementById("registerBtn")
+    .addEventListener("click", async () => {
+
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        const errorEl = document.getElementById("loginError");
+
+        errorEl.textContent = "";
+
+        try {
+            // Uses the email's local part as a default name - the user can
+            // change their name later once a "profile" section for account
+            // details exists; this keeps the popup UI minimal for now.
+            const name = email.split("@")[0] || "IntelliFill User";
+            const result = await backendRegister(name, email, password);
+            await saveAuthSession(result.token, result.user.email);
+            await refreshAuthUI();
+        } catch (error) {
+            errorEl.textContent = error.message || "Registration failed";
+        }
+
+    });
+
+document
+    .getElementById("logoutBtn")
+    .addEventListener("click", async () => {
+        await clearAuthSession();
+        await refreshAuthUI();
+    });
+
+refreshAuthUI();
