@@ -138,25 +138,40 @@ async function verifyApiKey(apiKey) {
 
 function selectBestModel(models) {
 
-    const names =
-        models.map(model =>
-
-            model.name.replace("models/", "")
-
+    const supportedModels =
+        models.filter(model =>
+            model.supportedGenerationMethods &&
+            model.supportedGenerationMethods.includes(
+                "generateContent"
+            )
         );
 
     for (const preferred of PREFERRED_MODELS) {
 
-        if (names.includes(preferred)) {
+        const found =
+            supportedModels.find(model =>
+                model.name.replace(
+                    "models/",
+                    ""
+                ) === preferred
+            );
 
-            return preferred;
+        if (found) {
+
+            return found.name.replace(
+                "models/",
+                ""
+            );
 
         }
 
     }
 
-    return names.length
-        ? names[0]
+    return supportedModels.length
+        ? supportedModels[0].name.replace(
+            "models/",
+            ""
+        )
         : null;
 
 }

@@ -73,6 +73,7 @@ document
             });
 
         // Send Message
+        // Send Message
         try {
 
             await chrome.tabs.sendMessage(
@@ -87,22 +88,26 @@ document
 
             );
 
-            // Extension popup immediately close
-            window.close();
-
             console.log("✅ Message Sent");
+
+            // Close popup after successful message
+            setTimeout(() => {
+
+                window.close();
+
+            }, 200);
 
         } catch (error) {
 
-            console.error("❌", error);
+            console.error("❌ Content script not available:", error);
+
+            // Reset button if message fails
+            button.innerHTML = `
+        🤖
+        <span>Start Autofill</span>
+    `;
 
         }
-
-        setTimeout(() => {
-
-            window.close();
-
-        }, 200);
 
     });
 async function updateProfileProgress() {
