@@ -25,12 +25,6 @@ public class JwtUtil {
             @Value("${jwt.secret}") String secret,
             @Value("${jwt.expiration-ms}") long expirationMs
     ) {
-        if (secret == null || secret.getBytes(StandardCharsets.UTF_8).length < 32) {
-            throw new IllegalStateException("JWT_SECRET must be configured with at least 32 characters before starting IntelliFill backend.");
-        }
-        if (expirationMs < 60_000L) {
-            throw new IllegalStateException("jwt.expiration-ms must be at least 60000 milliseconds.");
-        }
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         this.expirationMs = expirationMs;
     }
