@@ -1,0 +1,17 @@
+# Secrets and local configuration
+backend/src/main/resources/application.properties
+.env
+.env.*
+!.env.example
+
+# Java build files
+backend/target/
+target/
+
+# IDE files
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db

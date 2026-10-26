@@ -1,0 +1,421 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
+}
+
+body {
+    width: 320px;
+    min-height: 400px;
+    background: #0f172a;
+    color: white;
+    margin: 5;
+    overflow: hidden;
+}
+
+.popup{
+    width:100%;
+    min-height:400px;
+
+    background:#111827;
+
+    border-radius:24px;
+
+    padding:18px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.45);
+
+    border:1px solid rgba(255,255,255,.08);
+}
+
+header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.logo{
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    overflow:hidden;
+    flex:none;
+}
+.logo img{display:block;width:100%;height:100%;object-fit:contain;border-radius:14px}
+
+header h1 {
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+}
+
+header p {
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+}
+
+.statusCard {
+
+    background: #1e293b;
+
+    padding: 18px;
+
+    border-radius: 16px;
+
+    margin-bottom: 22px;
+
+}
+
+.statusCard h3 {
+
+    margin-bottom: 12px;
+
+    font-size: 15px;
+
+}
+
+.progress {
+
+    width: 100%;
+
+    height: 8px;
+
+    background: #334155;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-bottom: 10px;
+
+}
+
+.progressFill {
+
+    width: 83%;
+
+    height: 100%;
+
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+
+}
+
+.statusCard{
+
+    padding:14px;
+
+    border-radius:14px;
+
+    margin-bottom:14px;
+
+}
+
+.menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+.menu button {
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #1e293b;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 0 18px;
+
+    cursor: pointer;
+
+    transition: .25s;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.menu button:hover {
+
+    background: #334155;
+
+    transform: translateY(-2px);
+
+}
+
+footer {
+
+    margin-top: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+}
+
+.online {
+
+    width: 10px;
+
+    height: 10px;
+
+    background: #22c55e;
+
+    border-radius: 50%;
+
+}
+
+/* ================= Backend Account (Auth) ================= */
+
+.authCard {
+
+    padding: 12px 14px;
+
+    border-radius: 14px;
+
+    margin-bottom: 14px;
+
+}
+
+.authCard h3 {
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+
+    color: #cbd5e1;
+
+    font-weight: 600;
+
+}
+
+.authInput {
+
+    width: 100%;
+
+    padding: 8px 10px;
+
+    margin-bottom: 8px;
+
+    border-radius: 8px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    background: #0f172a;
+
+    color: white;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: border-color .2s;
+
+}
+
+.authInput:focus {
+
+    border-color: #8b5cf6;
+
+}
+
+.authInput::placeholder {
+
+    color: #64748b;
+
+}
+
+.authActions {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+.authBtn {
+
+    flex: 1;
+
+    height: 32px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+.authBtnPrimary {
+
+    background: linear-gradient(90deg, #4f46e5, #8b5cf6);
+
+    color: white;
+
+}
+
+.authBtnPrimary:hover {
+
+    filter: brightness(1.1);
+
+}
+
+.authBtnSecondary {
+
+    background: #334155;
+
+    color: #e2e8f0;
+
+}
+
+.authBtnSecondary:hover {
+
+    background: #475569;
+
+}
+
+.authError {
+
+    color: #f87171;
+
+    font-size: 11px;
+
+    margin-top: 6px;
+
+    min-height: 13px;
+
+}
+
+.loggedInRow {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+}
+
+.loggedInEmail {
+
+    font-size: 12px;
+
+    color: #cbd5e1;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}
+
+.logoutBtnSmall {
+
+    background: #334155;
+
+    color: #e2e8f0;
+
+    border: none;
+
+    padding: 6px 12px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition: .2s;
+
+}
+
+.logoutBtnSmall:hover {
+
+    background: #ef4444;
+
+}
+/* Light blue IntelliFill theme */
+:root{color-scheme:light}
+body{background:#eef6ff!important;color:#18324d!important}
+.popup{background:linear-gradient(155deg,#fff,#f0f7ff)!important;border:1px solid #d5e6f6!important;box-shadow:0 14px 34px #1c4f7d1c!important}
+header h1,.statusCard h3,.authCard h3{color:#18324d!important}
+header p,.online,.loggedInEmail{color:#66809a!important}
+.statusCard,.authCard,.menu button,.loggedInRow{background:#eaf4ff!important;border:1px solid #d7e6f5!important;color:#21415f!important;box-shadow:none!important}
+.progress{background:#d5e5f4!important}.progressFill{background:linear-gradient(90deg,#2878d0,#55b5f3)!important}
+.menu button:hover{background:#d9edff!important;color:#155ca6!important}
+.authInput{background:#fff!important;border:1px solid #cfdfef!important;color:#18324d!important}
+.authInput:focus{border-color:#4a9ce4!important;box-shadow:0 0 0 3px #4a9ce422!important}
+.authInput::placeholder{color:#8aa1b8!important}
+.authBtnPrimary{background:linear-gradient(110deg,#2878d0,#49a7ed)!important}
+.authBtnSecondary,.logoutBtnSmall{background:#dcecfb!important;color:#28577f!important}
+/* Softer low-glare popup surfaces */
+body{background:#e9f1f8!important;color:#17334d!important}.popup{background:linear-gradient(155deg,#e5edf5,#dce7f0)!important;border-color:#c5d5e3!important}.statusCard,.authCard,.menu button,.loggedInRow{background:#dce7f0!important;border-color:#c4d4e2!important;color:#23415d!important}.authInput{background:#edf3f8!important;color:#17334d!important}.authInput::placeholder{color:#637b91!important}
+ .authInput::placeholder{color:#667f95!important}
+/* Shared charcoal / pale-blue popup theme */
+:root{color-scheme:light}
+body{background:#dfe8ef!important;color:#273746!important}.popup{background:linear-gradient(145deg,#d3dee7,#cbd8e2)!important;border:1px solid #aebdca!important;box-shadow:0 16px 36px #24374725!important;color:#273746!important}
+header h1,.statusCard h3,.authCard h3{color:#263746!important}header p,.online,.loggedInEmail{color:#435a6c!important}.statusCard,.authCard,.menu button,.loggedInRow{background:#c5d3dd!important;border:1px solid #aebfcb!important;color:#293d4d!important;box-shadow:none!important}.menu button:hover{background:#1765a5!important;color:#fff!important}.progress{background:#aebdca!important}.progressFill{background:linear-gradient(90deg,#1765a5,#43a0d4)!important}.authInput{background:#e6edf2!important;border:1px solid #aabac7!important;color:#263746!important}.authInput::placeholder{color:#586d7e!important}.authInput:focus{border-color:#2679b8!important;box-shadow:0 0 0 3px #2679b833!important}.authBtnPrimary{background:linear-gradient(115deg,#1765a5,#3189c4)!important;color:#fff!important}.authBtnSecondary,.logoutBtnSmall{background:#465560!important;color:#fff!important}
+/* Compact premium popup: keep all primary actions visible with less scrolling. */
+body{width:320px!important;min-height:0!important;height:auto!important;max-height:480px!important;margin:0!important;overflow-y:auto!important;background:#cbd8e2!important;color:#273746!important}
+.popup{width:100%!important;min-height:0!important;height:auto!important;max-height:480px!important;padding:12px!important;border:1px solid #15966b!important;border-radius:22px!important;box-shadow:0 12px 28px #2437472b!important}
+header{gap:9px!important;margin-bottom:9px!important}
+.logo{width:38px!important;height:38px!important;border-radius:11px!important}
+header h1{font-size:19px!important;line-height:1.15!important}
+header p{font-size:11px!important;line-height:1.25!important}
+.statusCard{padding:10px 12px!important;border-radius:12px!important;margin-bottom:9px!important}
+.statusCard h3{font-size:13px!important;margin-bottom:7px!important}
+.progress{height:7px!important;margin-bottom:6px!important}
+.statusCard p,.statusCard span{font-size:11px!important}
+.authCard{padding:10px!important;border-radius:12px!important;margin-bottom:9px!important}
+.authCard h3{font-size:12px!important;margin-bottom:7px!important}
+.authInput{height:34px!important;padding:6px 9px!important;margin-bottom:5px!important;font-size:12px!important}
+.authBtnPrimary,.authBtnSecondary{height:32px!important;padding:0 10px!important;font-size:12px!important}
+.menu{gap:7px!important}
+.menu button{height:40px!important;min-height:40px!important;padding:0 12px!important;gap:10px!important;border-radius:10px!important;font-size:13px!important}
+footer{margin-top:10px!important;font-size:11px!important}
+.online{width:8px!important;height:8px!important;flex:none}
+.loggedInRow{padding:8px 10px!important;border-radius:10px!important}
+.loggedInEmail{font-size:11px!important}

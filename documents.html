@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IntelliFill — Document Parsing</title>
+  <link rel="stylesheet" href="documents.css">
+</head>
+<body data-page="documents">
+  <main class="docs-shell">
+    <header class="docs-topbar">
+      <a class="brand" href="profile.html" aria-label="Back to Manage Profile"><img class="brand-mark" src="icons/intellifill-48.png" alt=""><span>IntelliFill</span></a>
+      <a class="back-link" href="profile.html">← Manage Profile</a>
+    </header>
+    <section class="docs-heading">
+      <div><p class="eyebrow">YOUR PERSONAL VAULT</p><h1>Document Parsing</h1><p class="subtitle">Add documents once. IntelliFill reads them on this device and updates your profile.</p></div>
+      <div class="privacy-badge"><span class="privacy-icon">●</span><span><strong>Private by design</strong><small>Files and parsing stay in your browser</small></span></div>
+    </section>
+    <section class="docs-content"><div id="formContainer"></div></section>
+    <footer class="docs-footer">Original files stay in this browser’s IndexedDB. Only structured extracted fields are saved to your signed-in IntelliFill account.</footer>
+  </main>
+  <script src="js/authStorage.js"></script>
+  <script src="js/backendClient.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/database.js"></script>
+  <script src="vendor/pdfjs/pdf.min.js"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc = chrome.runtime.getURL("vendor/pdfjs/pdf.worker.min.js");</script>
+  <script src="vendor/mammoth/mammoth.browser.min.js"></script>
+  <script src="vendor/tesseract/tesseract.min.js"></script>
+  <script src="js/documentParser.js"></script>
+  <script src="js/documentExtractor.js"></script>
+  <script src="js/documents.js"></script>
+</body>
+</html>

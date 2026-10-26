@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>IntelliFill</title>
+
+    <link rel="stylesheet" href="popup.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="popup">
+
+        <header>
+
+            <div class="logo">
+                <img src="icons/intellifill-48.png" alt="IntelliFill icon">
+            </div>
+
+            <div>
+
+                <h1>IntelliFill</h1>
+
+                <p>AI Powered Autofill</p>
+
+            </div>
+
+        </header>
+
+
+        <div class="statusCard">
+
+            <h3>Profile Status</h3>
+
+            <div class="progress">
+
+                <div class="progressFill"></div>
+
+            </div>
+
+<span id="profilePercent">0% Complete</span>
+        </div>
+
+
+        <div class="statusCard authCard" id="backendLoginCard" style="display:none;">
+
+            <h3>🔐 Sign in for smarter AI</h3>
+
+            <input type="email" id="loginEmail" class="authInput" placeholder="Email">
+            <input type="password" id="loginPassword" class="authInput" placeholder="Password">
+
+            <div class="authActions">
+                <button id="loginBtn" class="authBtn authBtnPrimary">Login</button>
+                <button id="registerBtn" class="authBtn authBtnSecondary">Register</button>
+            </div>
+
+            <p id="loginError" class="authError"></p>
+
+        </div>
+
+        <div class="statusCard authCard" id="backendLoggedInCard" style="display:none;">
+
+            <div class="loggedInRow">
+                <span class="loggedInEmail" id="loggedInEmail">🟢</span>
+                <button id="logoutBtn" class="logoutBtnSmall">Logout</button>
+            </div>
+
+        </div>
+
+
+        <div class="menu">
+
+            <button id="profileBtn">
+                👤
+                <span>Manage Profile</span>
+            </button>
+
+            <button id="resumeBtn">
+                📄
+                <span>Document Parsing</span>
+            </button>
+
+            <button id="autofillBtn">
+                🤖
+                <span>Start Autofill</span>
+            </button>
+
+        </div>
+
+
+        <footer>
+
+            <span class="online"></span>
+
+            Ready
+
+        </footer>
+
+    </div>
+
+    <script src="js/authStorage.js"></script>
+    <script src="js/backendClient.js"></script>
+    <script src="popup.js"></script>
+
+</body>
+
+</html>
