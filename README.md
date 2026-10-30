@@ -1,6 +1,6 @@
 # ⚡ IntelliFill
 
-### AI-Powered Intelligent Web Form Detection & Autofill System
+### AI-Powered Intelligent Web Form Detection & Autofilling System
 
 IntelliFill is a Chrome Extension that intelligently detects web form fields, identifies their purpose, maps them with the user's saved profile, and automatically fills the form after the user confirmation.
 
